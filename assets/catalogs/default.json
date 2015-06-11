@@ -1,0 +1,59 @@
+{
+    "entities":
+    [
+        {
+            "main":
+            {
+                "name": "BlocDusk"
+            },
+            "graphic":
+            {
+                "texture": "./assets/img/BlocDusk.jpg"
+            },
+            "physic":
+            {
+                "type"        : "dynamic",
+                "fixtures"    :
+                [
+                    {
+                        "friction"    : 0.9,
+                        "restitution" : 0.5,
+                        "density"     : 1.0,
+                        "shape"       :
+                        {
+                            "type"    : "box",
+                            "size"    : { "x" : 1.0, "y" : 1.0 }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "main":
+            {
+                "name": "BlocWood"
+            },
+            "graphic":
+            {
+                "texture": "./assets/img/BlocWood.jpg"
+            },
+            "physic":
+            {
+                "type"        : "static",
+                "fixtures"    :
+                [
+                    {
+                        "friction"    : 0.9,
+                        "restitution" : 0.5,
+                        "density"     : 1.0,
+                        "shape"       :
+                        {
+                            "type"    : "box",
+                            "size"    : { "x" : 1.0, "y" : 1.0 }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
