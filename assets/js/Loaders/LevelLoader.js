@@ -1,8 +1,10 @@
+'use strict';
+
 /**
 * Load a level.
 * @constructor
 */
-function LevelLoader()
+Kafkaf.LevelLoader = function()
 {
 
 }
@@ -14,11 +16,11 @@ function LevelLoader()
 * @param callback Callback.
 * @return True if everything is ok.
 */
-LevelLoader.loadFromFile = function( filePath, entityManager, callback )
+Kafkaf.LevelLoader.loadFromFile = function( filePath, entityManager, callback )
 {
 	loadJSON( filePath, function( JSONData )
 	{
-		callback( LevelLoader.loadFromData( JSONData, entityManager ) );
+		callback( Kafkaf.LevelLoader.loadFromData( JSONData, entityManager ) );
 	})
 
     return true;
@@ -30,7 +32,7 @@ LevelLoader.loadFromFile = function( filePath, entityManager, callback )
 * @param entityManager EntityManager instance.
 * @return True if everything is ok.
 */
-LevelLoader.loadFromData = function( data, entityManager )
+Kafkaf.LevelLoader.loadFromData = function( data, entityManager )
 {
 	var entities = data.entities;
 
@@ -45,7 +47,7 @@ LevelLoader.loadFromData = function( data, entityManager )
         	entity.commonData.position.y = entities[i].position.y;
         }
 
-        EntityBuilder.buildFromName(entity, entities[i].name);
+        Kafkaf.EntityBuilder.buildFromName(entity, entities[i].name);
 	}
 
     return true;

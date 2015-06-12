@@ -1,8 +1,10 @@
+'use strict';
+
 /**
 * A simple entity.
 * @constructor
 */
-function Entity()
+Kafkaf.Entity = function()
 {
     // Common data.
     this.commonData = {

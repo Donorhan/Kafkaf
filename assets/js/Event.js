@@ -1,6 +1,12 @@
-function Event()
+'use strict';
+
+/**
+* Convert DOM events to game events.
+* @constructor
+*/
+Kafkaf.Event = function()
 {
-    this.type   = 0;
+    this.type   = Kafkaf.Event.Type.Unknow;
     this.x      = 0;
     this.y      = 0;
     this.key    = null;
@@ -9,7 +15,7 @@ function Event()
 /**
 * Event Types.
 */
-Event.Type = { MouseDown: 0, MouseUp: 1, MouseMove: 2, KeyDown: 3, KeyUp: 4, WindowResize: 5 };
+Kafkaf.Event.Type = { MouseDown: 0, MouseUp: 1, MouseMove: 2, KeyDown: 3, KeyUp: 4, WindowResize: 5, Unknow: 6 };
 
 /**
 * Mouse events
@@ -17,11 +23,11 @@ Event.Type = { MouseDown: 0, MouseUp: 1, MouseMove: 2, KeyDown: 3, KeyUp: 4, Win
 */
 document.onmousemove = function( event ) 
 {
-    var eventData   = new Event();
-    eventData.type  = Event.Type.MouseMove;
+    var eventData   = new Kafkaf.Event();
+    eventData.type  = Kafkaf.Event.Type.MouseMove;
     eventData.x     = event.x;
     eventData.y     = event.y;
-    application.onEvent(eventData);
+    Kafkaf.application.onEvent(eventData);
 };
 
 /**
@@ -30,11 +36,11 @@ document.onmousemove = function( event )
 */
 document.onmousedown = function( event ) 
 {
-    var eventData   = new Event();
-    eventData.type  = Event.Type.MouseDown;
+    var eventData   = new Kafkaf.Event();
+    eventData.type  = Kafkaf.Event.Type.MouseDown;
     eventData.x     = event.x;
     eventData.y     = event.y;
-    application.onEvent(eventData);
+    Kafkaf.application.onEvent(eventData);
 };
 
 /**
@@ -43,11 +49,11 @@ document.onmousedown = function( event )
 */
 document.onmouseup = function( event ) 
 {
-    var eventData       = new Event();
-    eventData.type      = Event.Type.MouseUp;
+    var eventData       = new Kafkaf.Event();
+    eventData.type      = Kafkaf.Event.Type.MouseUp;
     eventData.x         = event.x;
     eventData.y         = event.y;
-    application.onEvent(eventData);
+    Kafkaf.application.onEvent(eventData);
 };
 
 /**
@@ -56,10 +62,10 @@ document.onmouseup = function( event )
 */
 document.onkeydown = function( event ) 
 {
-    var eventData   = new Event();
-    eventData.type  = Event.Type.KeyDown;
+    var eventData   = new Kafkaf.Event();
+    eventData.type  = Kafkaf.Event.Type.KeyDown;
     eventData.key   = event.keyCode;
-    application.onEvent(eventData);
+    Kafkaf.application.onEvent(eventData);
 };
 
 /**
@@ -68,10 +74,10 @@ document.onkeydown = function( event )
 */
 document.onkeyup = function( event ) 
 {
-    var eventData   = new Event();
-    eventData.type  = Event.Type.KeyUp;
+    var eventData   = new Kafkaf.Event();
+    eventData.type  = Kafkaf.Event.Type.KeyUp;
     eventData.key   = event.keyCode;
-    application.onEvent(eventData);
+    Kafkaf.application.onEvent(eventData);
 };
 
 /**
@@ -80,9 +86,9 @@ document.onkeyup = function( event )
 */
 window.onresize = function( event ) 
 {
-    var eventData   = new Event();
-    eventData.type  = Event.Type.WindowResize;
+    var eventData   = new Kafkaf.Event();
+    eventData.type  = Kafkaf.Event.Type.WindowResize;
     eventData.x     = window.innerWidth;
     eventData.y     = window.innerHeigh;
-    application.onEvent(eventData);
+    Kafkaf.application.onEvent(eventData);
 };

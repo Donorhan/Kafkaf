@@ -1,8 +1,10 @@
+'use strict';
+
 /**
 * Physic engine entry point.
 * @constructor
 */
-function Physic()
+Kafkaf.Physic = function()
 {
     this.entities   = [];
     this.world      = null;
@@ -13,7 +15,7 @@ function Physic()
 * Init.
 * @return True if everything is ok.
 */
-Physic.prototype.init = function()
+Kafkaf.Physic.prototype.init = function()
 {
     // Manage link emscripten/Box2D.
     using(Box2D, "b2.+");
@@ -28,7 +30,7 @@ Physic.prototype.init = function()
 * Entry point.
 * @param deltaTime A floating value represeting the time elapsed since the last update.
 */
-Physic.prototype.update = function( deltaTime )
+Kafkaf.Physic.prototype.update = function( deltaTime )
 {
     // Simulate physic.
     this.world.Step( 1.0 / 60.0, 3.0, 2.0 );
@@ -46,7 +48,7 @@ Physic.prototype.update = function( deltaTime )
 * Call when entity is create.
 * @param entity An entity instance.
 */
-Physic.prototype.onEntityCreated = function( entity )
+Kafkaf.Physic.prototype.onEntityCreated = function( entity )
 {
     if( entity.physicComponent )
         this.entities[this.entities.length] = entity;
@@ -56,7 +58,7 @@ Physic.prototype.onEntityCreated = function( entity )
 * Call when entity is destroy.
 * @param entity An entity instance.
 */
-Physic.prototype.onEntityDestroyed = function( entity )
+Kafkaf.Physic.prototype.onEntityDestroyed = function( entity )
 {
 
 };

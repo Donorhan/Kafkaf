@@ -1,8 +1,10 @@
+'use strict';
+
 /**
 * Create a graphic element from data.
 * @constructor
 */
-function GraphicLoader()
+Kafkaf.GraphicLoader = function()
 {
 
 }
@@ -13,7 +15,7 @@ function GraphicLoader()
 * @param data A String using JSON format.
 * @return True if everything is ok.
 */
-GraphicLoader.loadFromData = function( entity, data )
+Kafkaf.GraphicLoader.loadFromData = function( entity, data )
 {
     var texture         = PIXI.Texture.fromImage(data.textureName);
     var instance        = new PIXI.Sprite(texture);

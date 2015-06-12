@@ -1,3 +1,5 @@
+'use strict';
+
 /**
 * Prepare "requestAnimFrame" function.
 */

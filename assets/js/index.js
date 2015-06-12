@@ -1,8 +1,8 @@
-var application = null;
+'use strict';
 
 window.onload = function() 
 {
-    application = new Application();
-    if( application.init() )
-        application.start();
+    Kafkaf.application = new Kafkaf.Application();
+    if( Kafkaf.application.init() )
+        Kafkaf.application.start();
 };

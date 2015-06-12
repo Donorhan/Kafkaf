@@ -1,8 +1,10 @@
+'use strict';
+
 /**
 * Manage entities.
 * @constructor
 */
-function EntityManager()
+Kafkaf.EntityManager = function()
 {   
     this.entities       = [];
     this.listeners      = [];
@@ -14,7 +16,7 @@ function EntityManager()
 * Update.
 * @param deltaTime A floating value representing the time elapsed since the last update.
 */
-EntityManager.prototype.update = function( deltaTime )
+Kafkaf.EntityManager.prototype.update = function( deltaTime )
 {
     // Process "create queue".
     for( var i = 0; i < this.createQueue.length; i++ )
@@ -22,7 +24,7 @@ EntityManager.prototype.update = function( deltaTime )
             this.listeners[j].onEntityCreated(this.createQueue[i]);
 
     // Process "destroy queue".
-    for( var i = 0; i < this.destroyQueue.length; i++ )
+    //for( var i = 0; i < this.destroyQueue.length; i++ )
         // ToDo: Remove entity from entities array here.
 
     this.createQueue    = [];
@@ -34,10 +36,10 @@ EntityManager.prototype.update = function( deltaTime )
 * @param name A string representing the name to assign, can be null.
 * @return An Entity instance.
 */
-EntityManager.prototype.createEntity = function( name )
+Kafkaf.EntityManager.prototype.createEntity = function( name )
 {
     // Create entity.
-    var entity                          = new Entity();
+    var entity                          = new Kafkaf.Entity();
     entity.commonData.name              = name;
     this.entities[this.entities.length] = entity;
 
@@ -51,7 +53,7 @@ EntityManager.prototype.createEntity = function( name )
 * Destroy the given entity.
 * @param entity An Entity instance.
 */
-EntityManager.prototype.destroyEntity = function( entity )
+Kafkaf.EntityManager.prototype.destroyEntity = function( entity )
 {
     // Notify listeners.
     for( var i = 0; i < this.listeners.length; i++ )
@@ -69,7 +71,7 @@ EntityManager.prototype.destroyEntity = function( entity )
 * @param name A string.
 * @return True if everything is ok.
 */
-EntityManager.prototype.setEntityName = function( entity, name )
+Kafkaf.EntityManager.prototype.setEntityName = function( entity, name )
 {
     if( this.getEntity(name) )
         return false;
@@ -85,7 +87,7 @@ EntityManager.prototype.setEntityName = function( entity, name )
 * @param name A string.
 * @return An Entity instance or null.
 */
-EntityManager.prototype.getEntity = function( name )
+Kafkaf.EntityManager.prototype.getEntity = function( name )
 {
     for( var i = 0; i < this.entities.length; i++ )
         if( this.entities[i].commonData.name == name )
@@ -105,7 +107,7 @@ EntityManager.prototype.getEntity = function( name )
 *
 * @param instance Instance to register.
 */
-EntityManager.prototype.register = function( instance )
+Kafkaf.EntityManager.prototype.register = function( instance )
 {
     // Check if instance isn't already registered.
     for( var i = 0; i < this.listeners.length; i++ )

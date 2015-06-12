@@ -1,8 +1,10 @@
+'use strict';
+
 /**
 * Load a set of entities.
 * @constructor
 */
-function EntityLoader()
+Kafkaf.EntityLoader = function()
 {
 
 }
@@ -13,11 +15,11 @@ function EntityLoader()
 * @param callback Callback.
 * @return True if everything is ok.
 */
-EntityLoader.loadFromFile = function( filePath, callback )
+Kafkaf.EntityLoader.loadFromFile = function( filePath, callback )
 {
     loadJSON( filePath, function( JSONData )
     {
-        callback( EntityLoader.loadFromData(JSONData) );
+        callback( Kafkaf.EntityLoader.loadFromData(JSONData) );
     })
 
     return true;
@@ -28,7 +30,7 @@ EntityLoader.loadFromFile = function( filePath, callback )
 * @param data Level's data (JSON format).
 * @return True if everything is ok.
 */
-EntityLoader.loadFromData = function( data )
+Kafkaf.EntityLoader.loadFromData = function( data )
 {
     var entities = data.entities;
 
@@ -48,11 +50,11 @@ EntityLoader.loadFromData = function( data )
         {
             // Type.            
             if( entities[i].physic.type == "static" )
-                entityData.physic.type = PhysicLoader.BodyType.Static;
+                entityData.physic.type = Kafkaf.PhysicLoader.BodyType.Static;
             else if( entities[i].physic.type == "dynamic" )
-                entityData.physic.type = PhysicLoader.BodyType.Dynamic;
+                entityData.physic.type = Kafkaf.PhysicLoader.BodyType.Dynamic;
             else
-                entityData.physic.type = PhysicLoader.BodyType.Kinematic;
+                entityData.physic.type = Kafkaf.PhysicLoader.BodyType.Kinematic;
 
             // Fixtures.
             entityData.physic.fixtures = [];
@@ -65,7 +67,7 @@ EntityLoader.loadFromData = function( data )
                 fixture.restitution = fixtureData.restitution;
                 fixture.density     = fixtureData.density;
                 fixture.shape       = {};
-                fixture.shape.type  = PhysicLoader.ShapeType.Box;
+                fixture.shape.type  = Kafkaf.PhysicLoader.ShapeType.Box;
                 fixture.shape.size  = { x : fixtureData.shape.size.x, y : fixtureData.shape.size.y };
 
                 entityData.physic.fixtures[j] = fixture;
@@ -73,7 +75,7 @@ EntityLoader.loadFromData = function( data )
         }
 
         // Save it.
-        EntityBuilder.builders[entities[i].main.name] = entityData;
+        Kafkaf.EntityBuilder.builders[entities[i].main.name] = entityData;
     }
 
     return true;
