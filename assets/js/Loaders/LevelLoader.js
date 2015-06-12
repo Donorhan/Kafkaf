@@ -47,6 +47,15 @@ Kafkaf.LevelLoader.loadFromData = function( data, entityManager )
         	entity.commonData.position.y = entities[i].position.y;
         }
 
+        if( entities[i].scale )
+        {
+        	entity.commonData.scale.x = entities[i].scale.x;
+        	entity.commonData.scale.y = entities[i].scale.y;
+        }
+
+        if( entities[i].rotation )
+        	entity.commonData.rotation = entities[i].rotation;
+
         Kafkaf.EntityBuilder.buildFromName(entity, entities[i].name);
 	}
 

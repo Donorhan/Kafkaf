@@ -66,9 +66,25 @@ Kafkaf.EntityLoader.loadFromData = function( data )
                 fixture.friction    = fixtureData.friction;
                 fixture.restitution = fixtureData.restitution;
                 fixture.density     = fixtureData.density;
+
                 fixture.shape       = {};
-                fixture.shape.type  = Kafkaf.PhysicLoader.ShapeType.Box;
-                fixture.shape.size  = { x : fixtureData.shape.size.x, y : fixtureData.shape.size.y };
+                if( fixtureData.shape.type == "box" )
+                {
+                    fixture.shape.type      = Kafkaf.PhysicLoader.ShapeType.Box;
+                    fixture.shape.size      = { x : fixtureData.shape.size.x, y : fixtureData.shape.size.y };
+                }
+                else if( fixtureData.shape.type == "circle" )
+                {
+                    fixture.shape.type      = Kafkaf.PhysicLoader.ShapeType.Circle;
+                    fixture.shape.size      = fixtureData.shape.size; 
+                }
+                else
+                {
+                    fixture.shape.type      = Kafkaf.PhysicLoader.ShapeType.Polygon;
+                    fixture.shape.vertices  = []; 
+                    for( var k = 0; k < fixtureData.shape.vertices; k++ )
+                        fixture.shape.vertices[k] = { x : fixtureData.shape.vertices[k].x, y : fixtureData.shape.vertices[k].y };
+                }
 
                 entityData.physic.fixtures[j] = fixture;
             }

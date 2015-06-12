@@ -51,7 +51,8 @@ Kafkaf.EntityBuilder.buildFromData = function( entity, data )
     if( data.transform )
     {
         entity.commonData.name      = data.transform.name       || null;
-        entity.commonData.position  = data.transform.position   || { x : 0, y : 0};
+        entity.commonData.position  = data.transform.position   || { x : 0, y : 0 };
+        entity.commonData.scale     = data.transform.scale      || { x : 1, y : 1 };
         entity.commonData.rotation  = data.transform.rotation   || 0;
     }
 
@@ -59,13 +60,7 @@ Kafkaf.EntityBuilder.buildFromData = function( entity, data )
         Kafkaf.GraphicLoader.loadFromData( entity, data.graphic );
 
     if( data.physic )
-    {
         Kafkaf.PhysicLoader.loadFromData( entity, data.physic );
-
-        // Set position.
-        var transform = entity.physicComponent.GetTransform();
-        entity.physicComponent.SetTransform( new b2Vec2(entity.commonData.position.x, entity.commonData.position.y), Math.radians(entity.commonData.rotation) );
-    }
 
     return true;
 };

@@ -56,14 +56,20 @@ Kafkaf.PhysicLoader.loadFromData = function( entity, data )
 
         if( data.fixtures[i].shape.type == Kafkaf.PhysicLoader.ShapeType.Circle )
         {
+            var size = (data.fixtures[i].shape.size * entity.commonData.scale.x * 0.5) - 0.01;
+
             var shape = new b2CircleShape();
-            shape.set_m_radius((data.fixtures[i].shape.size * 0.5) - 0.01);
+            shape.set_m_radius(size);
             fixture.set_shape(shape);
         }
         else if( data.fixtures[i].shape.type == Kafkaf.PhysicLoader.ShapeType.Box ) 
         {
+            var size = {};
+            size.x = (data.fixtures[i].shape.size.x * entity.commonData.scale.x * 0.5) - 0.01;
+            size.y = (data.fixtures[i].shape.size.y * entity.commonData.scale.y * 0.5) - 0.01;
+
             var shape = new b2PolygonShape();
-            shape.SetAsBox((data.fixtures[i].shape.size.x * 0.5) - 0.01, (data.fixtures[i].shape.size.y * 0.5) - 0.01 );
+            shape.SetAsBox(size.x, size.y);
             fixture.set_shape(shape);
         }   
         else
@@ -73,10 +79,14 @@ Kafkaf.PhysicLoader.loadFromData = function( entity, data )
                 vertices.push( new b2Vec2( data.fixtures[i].shape.vertices[j][0], data.fixtures[i].shape.vertices[j][1] ) );
 
             fixture.set_shape(createPolygonShape(vertices));
-        }   
+        }
 
         body.CreateFixture(fixture);
     }
+
+    // Set position.
+    var transform = body.GetTransform();
+    body.SetTransform( new b2Vec2(entity.commonData.position.x, entity.commonData.position.y), Math.radians(entity.commonData.rotation) );
 
     // Save Box2D instance.
     entity.physicComponent = body;
