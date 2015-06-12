@@ -89,6 +89,6 @@ window.onresize = function( event )
     var eventData   = new Kafkaf.Event();
     eventData.type  = Kafkaf.Event.Type.WindowResize;
     eventData.x     = window.innerWidth;
-    eventData.y     = window.innerHeigh;
+    eventData.y     = window.innerHeight;
     Kafkaf.application.onEvent(eventData);
 };
