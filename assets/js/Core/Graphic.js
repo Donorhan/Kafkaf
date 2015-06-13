@@ -4,7 +4,7 @@
 * Graphic part entry point.
 * @constructor
 */
-Kafkaf.Graphic = function()
+Core.Graphic = function()
 {
     this.entities   = [];
     this.renderer   = null;
@@ -17,7 +17,7 @@ Kafkaf.Graphic = function()
 * @param parentView A string representing view's identifier in the DOM. 
 * @return True if everything is ok.
 */
-Kafkaf.Graphic.prototype.init = function( parentView )
+Core.Graphic.prototype.init = function( parentView )
 {
     // Link view.
     this.view = document.getElementById(parentView);
@@ -49,7 +49,7 @@ Kafkaf.Graphic.prototype.init = function( parentView )
 * @param width An integer value.
 * @param height An integer value.
 */
-Kafkaf.Graphic.prototype.setWindowSize = function( width, height )
+Core.Graphic.prototype.setWindowSize = function( width, height )
 {
     this.renderer.view.style.width  = width + 'px';
     this.renderer.view.style.height = height + 'px';
@@ -59,7 +59,7 @@ Kafkaf.Graphic.prototype.setWindowSize = function( width, height )
 * Entry point.
 * @param deltaTime A floating value represeting the time elapsed since the last update.
 */
-Kafkaf.Graphic.prototype.update = function( deltaTime )
+Core.Graphic.prototype.update = function( deltaTime )
 {
     // Update positions.
     for( var i = 0; i < this.entities.length; i++ )
@@ -81,7 +81,7 @@ Kafkaf.Graphic.prototype.update = function( deltaTime )
 * Call when entity is create.
 * @param entity An entity instance.
 */
-Kafkaf.Graphic.prototype.onEntityCreated = function( entity )
+Core.Graphic.prototype.onEntityCreated = function( entity )
 {
     if( entity.graphicComponent )
     {
@@ -94,7 +94,7 @@ Kafkaf.Graphic.prototype.onEntityCreated = function( entity )
 * Call when entity is destroy.
 * @param entity An entity instance.
 */
-Kafkaf.Graphic.prototype.onEntityDestroyed = function( entity )
+Core.Graphic.prototype.onEntityDestroyed = function( entity )
 {
     // Todo.
 };

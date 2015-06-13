@@ -4,7 +4,7 @@
 * Load a level.
 * @constructor
 */
-Kafkaf.LevelLoader = function()
+Core.LevelLoader = function()
 {
 
 }
@@ -16,11 +16,11 @@ Kafkaf.LevelLoader = function()
 * @param callback Callback.
 * @return True if everything is ok.
 */
-Kafkaf.LevelLoader.loadFromFile = function( filePath, entityManager, callback )
+Core.LevelLoader.loadFromFile = function( filePath, entityManager, callback )
 {
 	loadJSON( filePath, function( JSONData )
 	{
-		callback( Kafkaf.LevelLoader.loadFromData( JSONData, entityManager ) );
+		callback( Core.LevelLoader.loadFromData( JSONData, entityManager ) );
 	})
 
     return true;
@@ -32,7 +32,7 @@ Kafkaf.LevelLoader.loadFromFile = function( filePath, entityManager, callback )
 * @param entityManager EntityManager instance.
 * @return True if everything is ok.
 */
-Kafkaf.LevelLoader.loadFromData = function( data, entityManager )
+Core.LevelLoader.loadFromData = function( data, entityManager )
 {
 	var entities = data.entities;
 
@@ -56,7 +56,7 @@ Kafkaf.LevelLoader.loadFromData = function( data, entityManager )
         if( entities[i].rotation )
         	entity.commonData.rotation = entities[i].rotation;
 
-        Kafkaf.EntityBuilder.buildFromName(entity, entities[i].name);
+        Core.EntityBuilder.buildFromName(entity, entities[i].name);
 	}
 
     return true;

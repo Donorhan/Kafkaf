@@ -4,7 +4,7 @@
 * Create a physic element from a source.
 * @constructor
 */
-Kafkaf.PhysicLoader = function()
+Core.PhysicLoader = function()
 {
 
 }
@@ -12,12 +12,12 @@ Kafkaf.PhysicLoader = function()
 /**
 * Types of physic body.
 */
-Kafkaf.PhysicLoader.BodyType = { Static: 0, Dynamic: 1, Kinematic: 2 };
+Core.PhysicLoader.BodyType = { Static: 0, Dynamic: 1, Kinematic: 2 };
 
 /**
 * Types of shape.
 */
-Kafkaf.PhysicLoader.ShapeType = { Circle: 0, Box: 1, Polygon: 2 };
+Core.PhysicLoader.ShapeType = { Circle: 0, Box: 1, Polygon: 2 };
 
 /**
 * Compute physic instance (Box2D) from JSON data.
@@ -25,7 +25,7 @@ Kafkaf.PhysicLoader.ShapeType = { Circle: 0, Box: 1, Polygon: 2 };
 * @param data A String using JSON format.
 * @return True if everything is ok.
 */
-Kafkaf.PhysicLoader.loadFromData = function( entity, data )
+Core.PhysicLoader.loadFromData = function( entity, data )
 {
     // Create body.
     var definition = new b2BodyDef();
@@ -33,10 +33,10 @@ Kafkaf.PhysicLoader.loadFromData = function( entity, data )
     // Set type.
     switch(data.type)
     {
-        case Kafkaf.PhysicLoader.BodyType.Dynamic:
+        case Core.PhysicLoader.BodyType.Dynamic:
             definition.set_type(b2_dynamicBody);
             break;
-        case Kafkaf.PhysicLoader.BodyType.Kinematic:
+        case Core.PhysicLoader.BodyType.Kinematic:
             definition.set_type(b2_kinematicBody);
             break;
         default:
@@ -44,7 +44,7 @@ Kafkaf.PhysicLoader.loadFromData = function( entity, data )
             break;
     }
 
-    var body = Kafkaf.application.physic.world.CreateBody(definition);
+    var body = Core.application.physic.world.CreateBody(definition);
 
     // Create fixtures.
     for( var i = 0; i < data.fixtures.length; i++ )
@@ -54,7 +54,7 @@ Kafkaf.PhysicLoader.loadFromData = function( entity, data )
         fixture.set_friction(data.fixtures[i].friction);
         fixture.set_restitution(data.fixtures[i].restitution);
 
-        if( data.fixtures[i].shape.type == Kafkaf.PhysicLoader.ShapeType.Circle )
+        if( data.fixtures[i].shape.type == Core.PhysicLoader.ShapeType.Circle )
         {
             var size = (data.fixtures[i].shape.size * entity.commonData.scale.x * 0.5) - 0.01;
 
@@ -62,7 +62,7 @@ Kafkaf.PhysicLoader.loadFromData = function( entity, data )
             shape.set_m_radius(size);
             fixture.set_shape(shape);
         }
-        else if( data.fixtures[i].shape.type == Kafkaf.PhysicLoader.ShapeType.Box ) 
+        else if( data.fixtures[i].shape.type == Core.PhysicLoader.ShapeType.Box ) 
         {
             var size = {};
             size.x = (data.fixtures[i].shape.size.x * entity.commonData.scale.x * 0.5) - 0.01;

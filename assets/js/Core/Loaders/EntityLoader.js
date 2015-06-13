@@ -4,7 +4,7 @@
 * Load a set of entities.
 * @constructor
 */
-Kafkaf.EntityLoader = function()
+Core.EntityLoader = function()
 {
 
 }
@@ -15,11 +15,11 @@ Kafkaf.EntityLoader = function()
 * @param callback Callback.
 * @return True if everything is ok.
 */
-Kafkaf.EntityLoader.loadFromFile = function( filePath, callback )
+Core.EntityLoader.loadFromFile = function( filePath, callback )
 {
     loadJSON( filePath, function( JSONData )
     {
-        callback( Kafkaf.EntityLoader.loadFromData(JSONData) );
+        callback( Core.EntityLoader.loadFromData(JSONData) );
     })
 
     return true;
@@ -30,7 +30,7 @@ Kafkaf.EntityLoader.loadFromFile = function( filePath, callback )
 * @param data Level's data (JSON format).
 * @return True if everything is ok.
 */
-Kafkaf.EntityLoader.loadFromData = function( data )
+Core.EntityLoader.loadFromData = function( data )
 {
     var entities = data.entities;
 
@@ -50,11 +50,11 @@ Kafkaf.EntityLoader.loadFromData = function( data )
         {
             // Type.            
             if( entities[i].physic.type == "static" )
-                entityData.physic.type = Kafkaf.PhysicLoader.BodyType.Static;
+                entityData.physic.type = Core.PhysicLoader.BodyType.Static;
             else if( entities[i].physic.type == "dynamic" )
-                entityData.physic.type = Kafkaf.PhysicLoader.BodyType.Dynamic;
+                entityData.physic.type = Core.PhysicLoader.BodyType.Dynamic;
             else
-                entityData.physic.type = Kafkaf.PhysicLoader.BodyType.Kinematic;
+                entityData.physic.type = Core.PhysicLoader.BodyType.Kinematic;
 
             // Fixtures.
             entityData.physic.fixtures = [];
@@ -70,17 +70,17 @@ Kafkaf.EntityLoader.loadFromData = function( data )
                 fixture.shape       = {};
                 if( fixtureData.shape.type == "box" )
                 {
-                    fixture.shape.type      = Kafkaf.PhysicLoader.ShapeType.Box;
+                    fixture.shape.type      = Core.PhysicLoader.ShapeType.Box;
                     fixture.shape.size      = { x : fixtureData.shape.size.x, y : fixtureData.shape.size.y };
                 }
                 else if( fixtureData.shape.type == "circle" )
                 {
-                    fixture.shape.type      = Kafkaf.PhysicLoader.ShapeType.Circle;
+                    fixture.shape.type      = Core.PhysicLoader.ShapeType.Circle;
                     fixture.shape.size      = fixtureData.shape.size; 
                 }
                 else
                 {
-                    fixture.shape.type      = Kafkaf.PhysicLoader.ShapeType.Polygon;
+                    fixture.shape.type      = Core.PhysicLoader.ShapeType.Polygon;
                     fixture.shape.vertices  = []; 
                     for( var k = 0; k < fixtureData.shape.vertices; k++ )
                         fixture.shape.vertices[k] = { x : fixtureData.shape.vertices[k].x, y : fixtureData.shape.vertices[k].y };
@@ -91,7 +91,7 @@ Kafkaf.EntityLoader.loadFromData = function( data )
         }
 
         // Save it.
-        Kafkaf.EntityBuilder.builders[entities[i].main.name] = entityData;
+        Core.EntityBuilder.builders[entities[i].main.name] = entityData;
     }
 
     return true;

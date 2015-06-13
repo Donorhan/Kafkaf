@@ -4,7 +4,7 @@
 * Create a graphic element from data.
 * @constructor
 */
-Kafkaf.GraphicLoader = function()
+Core.GraphicLoader = function()
 {
 
 }
@@ -15,10 +15,10 @@ Kafkaf.GraphicLoader = function()
 * @param data A String using JSON format.
 * @return True if everything is ok.
 */
-Kafkaf.GraphicLoader.loadFromData = function( entity, data )
+Core.GraphicLoader.loadFromData = function( entity, data )
 {
-    var texture         = PIXI.Texture.fromImage(data.textureName);
-    var instance        = new PIXI.Sprite(texture);
+    var texture 	= PIXI.Texture.fromImage(data.textureName);
+    var instance 	= new PIXI.Sprite(texture);
 
     // Set from center.
     instance.anchor.x = 0.5;

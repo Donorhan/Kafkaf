@@ -4,7 +4,7 @@
 * Create a list of predefined entities.
 * @constructor
 */
-Kafkaf.EntityBuilder = function()
+Core.EntityBuilder = function()
 {
 
 }
@@ -12,7 +12,7 @@ Kafkaf.EntityBuilder = function()
 /**
 * Builders instances.
 */
-Kafkaf.EntityBuilder.builders = [];
+Core.EntityBuilder.builders = [];
 
 /**
 * Build a new entity using his name.
@@ -20,15 +20,15 @@ Kafkaf.EntityBuilder.builders = [];
 * @param name Name of the entity pattern.
 * @return True if everything is ok.
 */
-Kafkaf.EntityBuilder.buildFromName = function( entity, name )
+Core.EntityBuilder.buildFromName = function( entity, name )
 {
     // Search builder.
     var source = null;
-    for( var builder in Kafkaf.EntityBuilder.builders )
+    for( var builder in Core.EntityBuilder.builders )
     {
         if( builder == name )
         {
-            source = Kafkaf.EntityBuilder.builders[builder];
+            source = Core.EntityBuilder.builders[builder];
             break;
         }
     }
@@ -37,7 +37,7 @@ Kafkaf.EntityBuilder.buildFromName = function( entity, name )
     if( !source )
         return false;
 
-    return Kafkaf.EntityBuilder.buildFromData(entity, source);
+    return Core.EntityBuilder.buildFromData(entity, source);
 };
 
 /**
@@ -46,7 +46,7 @@ Kafkaf.EntityBuilder.buildFromName = function( entity, name )
 * @param data A string representing entity's data (JSON format).
 * @return True if everything is ok.
 */
-Kafkaf.EntityBuilder.buildFromData = function( entity, data )
+Core.EntityBuilder.buildFromData = function( entity, data )
 {
     if( data.transform )
     {
@@ -57,10 +57,10 @@ Kafkaf.EntityBuilder.buildFromData = function( entity, data )
     }
 
     if( data.graphic )
-        Kafkaf.GraphicLoader.loadFromData( entity, data.graphic );
+        Core.GraphicLoader.loadFromData( entity, data.graphic );
 
     if( data.physic )
-        Kafkaf.PhysicLoader.loadFromData( entity, data.physic );
+        Core.PhysicLoader.loadFromData( entity, data.physic );
 
     return true;
 };

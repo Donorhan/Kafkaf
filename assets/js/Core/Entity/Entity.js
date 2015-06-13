@@ -4,7 +4,7 @@
 * A simple entity.
 * @constructor
 */
-Kafkaf.Entity = function()
+Core.Entity = function()
 {
     // Common data.
     this.commonData = {

@@ -2,7 +2,7 @@
 
 window.onload = function() 
 {
-    Kafkaf.application = new Kafkaf.Application();
-    if( Kafkaf.application.init() )
-        Kafkaf.application.start();
+    Core.application = new Core.Application();
+    if( Core.application.init() )
+        Core.application.start();
 };

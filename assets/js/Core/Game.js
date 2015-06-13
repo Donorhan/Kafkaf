@@ -4,16 +4,16 @@
 * Manage game's logic.
 * @constructor
 */
-Kafkaf.Game = function()
+Core.Game = function()
 {
-    this.entityManager = new Kafkaf.EntityManager();
+    this.entityManager = new Core.EntityManager();
 }
 
 /**
 * Init.
 * @return True if everything is ok.
 */
-Kafkaf.Game.prototype.init = function()
+Core.Game.prototype.init = function()
 {
     return true;
 };
@@ -22,7 +22,7 @@ Kafkaf.Game.prototype.init = function()
 * Entry point.
 * @param deltaTime A floating value representing the time elapsed since the last update.
 */
-Kafkaf.Game.prototype.update = function( deltaTime )
+Core.Game.prototype.update = function( deltaTime )
 {
     this.entityManager.update(deltaTime);
 };
@@ -31,11 +31,11 @@ Kafkaf.Game.prototype.update = function( deltaTime )
 * Call on an event.
 * @param event An Event instance. 
 */
-Kafkaf.Game.prototype.onEvent = function( event )
+Core.Game.prototype.onEvent = function( event )
 {
     switch(event.type)
     {
-        case Kafkaf.Event.Type.KeyDown:
+        case Core.Event.Type.KeyDown:
         {
             switch(event.key)
             {

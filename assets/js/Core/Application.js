@@ -4,24 +4,24 @@
 * Application's entry point.
 * @constructor
 */
-Kafkaf.Application = function()
+Core.Application = function()
 {
-    if( Kafkaf.Application.prototype._singletonInstance )
-      return Kafkaf.Application.prototype._singletonInstance;
+    if( Core.Application.prototype._singletonInstance )
+      return Core.Application.prototype._singletonInstance;
 
     this.loop       = null;
-    this.game       = new Kafkaf.Game();
-    this.graphic    = new Kafkaf.Graphic();
-    this.physic     = new Kafkaf.Physic();
+    this.game       = new Core.Game();
+    this.graphic    = new Core.Graphic();
+    this.physic     = new Core.Physic();
 
-    Kafkaf.Application.prototype._singletonInstance = this;
+    Core.Application.prototype._singletonInstance = this;
 }
 
 /**
 * Init the application.
 * @return True if everything is ok.
 */
-Kafkaf.Application.prototype.init = function()
+Core.Application.prototype.init = function()
 {
     var initDone = this.game.init() && this.physic.init() && this.graphic.init("application");
     
@@ -38,7 +38,7 @@ Kafkaf.Application.prototype.init = function()
 /**
 * Start the application.
 */
-Kafkaf.Application.prototype.start = function()
+Core.Application.prototype.start = function()
 {
     var _this           = this;
     var previousTime    = 0;
@@ -57,12 +57,12 @@ Kafkaf.Application.prototype.start = function()
     };
 
     // Load catalog of objects.
-    Kafkaf.EntityLoader.loadFromFile("./assets/data/catalog_default.json?" + Math.random(), function( success )
+    Core.EntityLoader.loadFromFile("./assets/data/catalog_default.json?" + Math.random(), function( success )
     {
         if( success )
         {
             // Load level.
-            Kafkaf.LevelLoader.loadFromFile("./assets/data/level_test.json?" + Math.random(), _this.game.entityManager, function( success )
+            Core.LevelLoader.loadFromFile("./assets/data/level_test.json?" + Math.random(), _this.game.entityManager, function( success )
             {
                 // Start main loop.
                 _this.loop(0);
@@ -74,7 +74,7 @@ Kafkaf.Application.prototype.start = function()
 /**
 * Update logic.
 */
-Kafkaf.Application.prototype.update = function( deltaTime )
+Core.Application.prototype.update = function( deltaTime )
 {
     this.game.update(deltaTime);
     this.physic.update(deltaTime);
@@ -83,7 +83,7 @@ Kafkaf.Application.prototype.update = function( deltaTime )
 /**
 * Render.
 */
-Kafkaf.Application.prototype.render = function( deltaTime )
+Core.Application.prototype.render = function( deltaTime )
 {
     this.graphic.update(deltaTime);
 };
@@ -92,9 +92,9 @@ Kafkaf.Application.prototype.render = function( deltaTime )
 * Call on an event.
 * @param event An Event instance. 
 */
-Kafkaf.Application.prototype.onEvent = function( event )
+Core.Application.prototype.onEvent = function( event )
 {
-    if( event.type == Kafkaf.Event.Type.WindowResize )
+    if( event.type == Core.Event.Type.WindowResize )
         this.graphic.setWindowSize(event.x, event.y);
 
     this.game.onEvent(event);
