@@ -2,15 +2,16 @@
 
 /**
 * Application's entry point.
+* @param game A Game instance.
 * @constructor
 */
-Core.Application = function()
+Core.Application = function( game )
 {
     if( Core.Application.prototype._singletonInstance )
       return Core.Application.prototype._singletonInstance;
 
     this.loop       = null;
-    this.game       = new Core.Game();
+    this.game       = game;
     this.graphic    = new Core.Graphic();
     this.physic     = new Core.Physic();
 
@@ -24,7 +25,7 @@ Core.Application = function()
 Core.Application.prototype.init = function()
 {
     var initDone = this.game.init() && this.physic.init() && this.graphic.init("application");
-    
+
     // Link engines to the entity manager.
     if( initDone )
     {
