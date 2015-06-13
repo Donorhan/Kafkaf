@@ -57,12 +57,12 @@ Kafkaf.Application.prototype.start = function()
     };
 
     // Load catalog of objects.
-    Kafkaf.EntityLoader.loadFromFile("./assets/catalogs/default.json?" + Math.random(), function( success )
+    Kafkaf.EntityLoader.loadFromFile("./assets/data/catalog_default.json?" + Math.random(), function( success )
     {
         if( success )
         {
             // Load level.
-            Kafkaf.LevelLoader.loadFromFile("./assets/levels/tests.json?" + Math.random(), _this.game.entityManager, function( success )
+            Kafkaf.LevelLoader.loadFromFile("./assets/data/level_test.json?" + Math.random(), _this.game.entityManager, function( success )
             {
                 // Start main loop.
                 _this.loop(0);
