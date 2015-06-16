@@ -57,7 +57,7 @@ Core.Graphic.prototype.setWindowSize = function( width, height )
 
 /**
 * Entry point.
-* @param deltaTime A floating value represeting the time elapsed since the last update.
+* @param deltaTime A floating value representing the time elapsed since the last update.
 */
 Core.Graphic.prototype.update = function( deltaTime )
 {

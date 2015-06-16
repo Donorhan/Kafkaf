@@ -7,7 +7,8 @@
 */
 Kafkaf.Game = function()
 {
-    this.entityManager = new Core.EntityManager();
+    this.sceneManager   = new Core.SceneManager();
+    this.entityManager  = new Core.EntityManager();
 }
 
 /**
@@ -25,6 +26,7 @@ Kafkaf.Game.prototype.init = function()
 */
 Kafkaf.Game.prototype.update = function( deltaTime )
 {
+    this.sceneManager.update(deltaTime);
     this.entityManager.update(deltaTime);
 };
 
