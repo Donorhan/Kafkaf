@@ -2,13 +2,10 @@ goog.provide('Core.Application');
 
 /**
 * Application's entry point.
-* @param {Core.Game} game A Game instance.
 * @constructor
 */
-Core.Application = function( game )
+Core.Application = function()
 {
-    goog.addSingletonGetter(Core.Application);
-
     /**
     * Loop instance: Must be stocked in Javascript.
     * @type {function}
@@ -21,15 +18,18 @@ Core.Application = function( game )
     * @type {Core.Game}
     * @private
     */
-    this.game = game;
+    this.game = null;
 }
+goog.addSingletonGetter(Core.Application);
 
 /**
 * Init the application.
+* @param {Core.Game} game A Game instance.
 * @return {boolean} True if everything is ok.
 */
-Core.Application.prototype.init = function()
+Core.Application.prototype.init = function( game )
 {
+    this.game = game;
     return this.game.init();
 };
 
@@ -62,7 +62,8 @@ Core.Application.prototype.start = function()
 */
 Core.Application.prototype.update = function( deltaTime )
 {
-    this.game.update(deltaTime);
+    if( this.game )
+        this.game.update(deltaTime);
 };
 
 /**
@@ -71,7 +72,8 @@ Core.Application.prototype.update = function( deltaTime )
 */
 Core.Application.prototype.render = function( deltaTime )
 {
-    this.game.render(deltaTime);
+    if( this.game )
+        this.game.render(deltaTime);
 };
 
 /**
@@ -80,5 +82,6 @@ Core.Application.prototype.render = function( deltaTime )
 */
 Core.Application.prototype.onEvent = function( event )
 {
-    this.game.onEvent(event);
+    if( this.game )
+        this.game.onEvent(event);
 };

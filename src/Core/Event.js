@@ -1,4 +1,5 @@
 goog.provide('Core.Event');
+goog.require('Core.Application');
 
 /**
 * Convert DOM events to game events.
@@ -47,7 +48,9 @@ document.onmousemove = function( event )
     eventData.type  = Core.Event.Type.MouseMove;
     eventData.x     = event.x;
     eventData.y     = event.y;
-    Core.application.onEvent(eventData);
+
+    if( Core.Application.getInstance() )
+        Core.Application.getInstance().onEvent(eventData);
 };
 
 /**
@@ -60,7 +63,9 @@ document.onmousedown = function( event )
     eventData.type  = Core.Event.Type.MouseDown;
     eventData.x     = event.x;
     eventData.y     = event.y;
-    Core.application.onEvent(eventData);
+
+    if( Core.Application.getInstance() )
+        Core.Application.getInstance().onEvent(eventData);
 };
 
 /**
@@ -73,7 +78,9 @@ document.onmouseup = function( event )
     eventData.type      = Core.Event.Type.MouseUp;
     eventData.x         = event.x;
     eventData.y         = event.y;
-    Core.application.onEvent(eventData);
+
+    if( Core.Application.getInstance() )
+        Core.Application.getInstance().onEvent(eventData);
 };
 
 /**
@@ -85,7 +92,9 @@ document.onkeydown = function( event )
     var eventData   = new Core.Event();
     eventData.type  = Core.Event.Type.KeyDown;
     eventData.key   = event.keyCode;
-    Core.application.onEvent(eventData);
+
+    if( Core.Application.getInstance() )
+        Core.Application.getInstance().onEvent(eventData);
 };
 
 /**
@@ -97,7 +106,9 @@ document.onkeyup = function( event )
     var eventData   = new Core.Event();
     eventData.type  = Core.Event.Type.KeyUp;
     eventData.key   = event.keyCode;
-    Core.application.onEvent(eventData);
+
+    if( Core.Application.getInstance() )
+        Core.Application.getInstance().onEvent(eventData);
 };
 
 /**
@@ -110,5 +121,7 @@ window.onresize = function( event )
     eventData.type  = Core.Event.Type.WindowResize;
     eventData.x     = window.innerWidth;
     eventData.y     = window.innerHeight;
-    Core.application.onEvent(eventData);
+
+    if( Core.Application.getInstance() )
+        Core.Application.getInstance().onEvent(eventData);
 };

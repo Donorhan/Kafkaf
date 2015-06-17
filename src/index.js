@@ -1,6 +1,8 @@
+goog.require('Core.Application');
+
 window.onload = function() 
 {
-    Core.application = new Core.Application( new Kafkaf.Game() );
-    if( Core.application.init() )
-        Core.application.start();
+	var application = Core.Application.getInstance();
+    if( application.init( new Kafkaf.Game() ) )
+        application.start();
 };
