@@ -1,5 +1,6 @@
 goog.provide('Kafkaf.PhysicSystem');
 goog.require('Kafkaf.PhysicBodyComponent');
+goog.require('Kafkaf.Debug');
 
 /**
 * Simulate physics.
@@ -18,6 +19,12 @@ Kafkaf.PhysicSystem = function()
     * @type {b2World}
     */
     this.physicWorld = new b2World( new b2Vec2(0.0, 10.0) );
+
+    /**
+    * The graphic object where Box2D will draw in debug mode.
+    * @type {PIXI.Graphics|null}
+    */
+    this.debugGraphicObject = null;
 }
 ES.Utils.extend(ES.System, Kafkaf.PhysicSystem);
 
@@ -30,7 +37,7 @@ Kafkaf.PhysicSystem.prototype.update = function( deltaTime )
     // Simulate physic.
     this.physicWorld.Step( 1.0 / 60.0, 3.0, 2.0 );
 
-    // Sync physic body with entities.
+    // Synchronize physic bodies with entities.
     for( var i = 0; i < this.entities.length; i++ )
     {
         var physicBodyComponent        = this.entities[i].getComponent(Kafkaf.PhysicBodyComponent);
@@ -40,4 +47,23 @@ Kafkaf.PhysicSystem.prototype.update = function( deltaTime )
         transformComponent.position.y  = physicBodyComponent.instance.GetPosition().get_y();
         transformComponent.rotation    = physicBodyComponent.instance.GetAngle();
     }    
+
+    // Draw Box2D's debug.
+    if( this.debugGraphicObject )
+    {
+        this.debugGraphicObject.clear();
+        this.physicWorld.DrawDebugData();
+    }
+};
+
+/**
+* Activate debug.
+* @return {PIXI.Graphics} An instance of PIXI.Graphics.
+*/
+Kafkaf.PhysicSystem.prototype.activateDebug = function( )
+{
+    this.debugGraphicObject = new PIXI.Graphics();
+    this.physicWorld.SetDebugDraw( Kafkaf.Debug.getPIXIDebugDraw(this.debugGraphicObject) );
+
+    return this.debugGraphicObject;
 };

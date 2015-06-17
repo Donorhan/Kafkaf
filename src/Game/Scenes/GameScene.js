@@ -72,6 +72,13 @@ Kafkaf.GameScene.prototype.onLoad = function()
 
     // Init.
     this.levelLoader.init();
+
+    // Debug physic.
+    {
+        var physicSystem = this.world.getSystem(Kafkaf.PhysicSystem);
+        var graphicDebugObject = physicSystem.activateDebug();
+        this.rendererSystem.scene.addChild(graphicDebugObject);
+    }
 };
 
 /**

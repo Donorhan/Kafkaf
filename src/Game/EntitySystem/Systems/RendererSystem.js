@@ -9,7 +9,7 @@ goog.require('Kafkaf.SpriteComponent');
 */
 Kafkaf.RendererSystem = function( parentView )
 {
-    ES.System.call(this, [Kafkaf.SpriteComponent]);
+    ES.System.call(this/*, [Kafkaf.SpriteComponent]*/);
 
     var view = document.getElementById(parentView);
     if( !view )
