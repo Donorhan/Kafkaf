@@ -53,6 +53,7 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
         fixture.set_density(data.fixtures[i].density);
         fixture.set_friction(data.fixtures[i].friction);
         fixture.set_restitution(data.fixtures[i].restitution);
+        fixture.set_isSensor(data.fixtures[i].sensor);
 
         if( data.fixtures[i].shape.type == "circle" )
         {
@@ -85,7 +86,6 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
     }
 
     // Set position.
-    var transform           = body.GetTransform();
     body.SetTransform( new b2Vec2(transformComponent.position.x, transformComponent.position.y), goog.math.toRadians(transformComponent.rotation) );
 
     // Save Box2D instance.

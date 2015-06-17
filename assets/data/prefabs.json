@@ -19,6 +19,7 @@
                         "friction"    : 0.9,
                         "restitution" : 0.8,
                         "density"     : 1.0,
+                        "sensor"      : false,
                         "shape"       :
                         {
                             "type"    : "circle",
@@ -46,6 +47,7 @@
                         "friction"    : 0.9,
                         "restitution" : 0.3,
                         "density"     : 1.0,
+                        "sensor"      : false,
                         "shape"       :
                         {
                             "type"    : "box",
@@ -73,6 +75,7 @@
                         "friction"    : 0.9,
                         "restitution" : 0.0,
                         "density"     : 1.0,
+                        "sensor"      : false,
                         "shape"       :
                         {
                             "type"    : "box",
