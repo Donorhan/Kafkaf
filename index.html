@@ -8,38 +8,42 @@
     </head>
     <body>
 
+        <!-- Drawing area -->
         <div id="application"></div>
 
-        <script>
-            var Kafkaf  = Kafkaf || {};
-            var Core    = Core   || {};
-        </script>
+        <!-- Closure library -->
+        <script src="./libs/closure-library/closure/goog/base.js"></script>
 
         <!-- Third party -->
         <script src="./libs/Box2D_v2.3.1_min.js"></script>
         <script src="./libs/embox2d-helpers.js"></script>
+        <script src="./libs/EntitySystem.debug.js"></script>
         <script src="./libs/pixi.min.js"></script>
 
         <!-- Core -->
-        <script src="./assets/js/Core/Loaders/EntityLoader.js"></script>
-        <script src="./assets/js/Core/Loaders/GraphicLoader.js"></script>
-        <script src="./assets/js/Core/Loaders/PhysicLoader.js"></script>
-        <script src="./assets/js/Core/Loaders/LevelLoader.js"></script>
-        <script src="./assets/js/Core/Graphic.js"></script>
-        <script src="./assets/js/Core/Physic.js"></script>
-        <script src="./assets/js/Core/Game.js"></script>
-        <script src="./assets/js/Core/Entity/Entity.js"></script>
-        <script src="./assets/js/Core/Entity/EntityManager.js"></script>
-        <script src="./assets/js/Core/Entity/EntityBuilder.js"></script>
-        <script src="./assets/js/Core/Scene/Scene.js"></script>
-        <script src="./assets/js/Core/Scene/SceneManager.js"></script>
-        <script src="./assets/js/Core/Application.js"></script>
-        <script src="./assets/js/Core/Utils/utils.js"></script>
-        <script src="./assets/js/Core/Event.js"></script>
+        <script src="./src/Core/Game.js"></script>
+        <script src="./src/Core/Scene/Scene.js"></script>
+        <script src="./src/Core/Scene/SceneManager.js"></script>
+        <script src="./src/Core/Application.js"></script>
+        <script src="./src/Core/Utils/utils.js"></script>
+        <script src="./src/Core/Event.js"></script>
 
         <!-- Game -->
-        <script src="./assets/js/Game/Game.js"></script>
+        <script src="./src/Game/EntitySystem/Events/UserEvent.js"></script>
+        <script src="./src/Game/EntitySystem/Components/TransformComponent.js"></script>
+        <script src="./src/Game/EntitySystem/Components/PhysicBodyComponent.js"></script>
+        <script src="./src/Game/EntitySystem/Components/SpriteComponent.js"></script>
+        <script src="./src/Game/EntitySystem/Systems/GameSystem.js"></script>
+        <script src="./src/Game/EntitySystem/Systems/RendererSystem.js"></script>
+        <script src="./src/Game/EntitySystem/Systems/PhysicSystem.js"></script>
+        <script src="./src/Game/EntitySystem/Loaders/TransformLoader.js"></script>
+        <script src="./src/Game/EntitySystem/Loaders/PhysicBodyLoader.js"></script>
+        <script src="./src/Game/EntitySystem/Loaders/SpriteLoader.js"></script>
+        <script src="./src/Game/Helpers/EntityBuilder.js"></script>
+        <script src="./src/Game/Helpers/LevelLoader.js"></script>
+        <script src="./src/Game/Scenes/GameScene.js"></script>
+        <script src="./src/Game/Game.js"></script>
 
-        <script src="./assets/js/index.js"></script>
+        <script src="./src/index.js"></script>
     </body>
 </html>

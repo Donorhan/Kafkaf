@@ -1,0 +1,86 @@
+{
+    "prefabs":
+    [
+        {
+            "main":
+            {
+                "name": "Football"
+            },
+            "SpriteComponent":
+            {
+                "texture": "./assets/img/football.png"
+            },
+            "PhysicBodyComponent":
+            {
+                "type"        : "dynamic",
+                "fixtures"    :
+                [
+                    {
+                        "friction"    : 0.9,
+                        "restitution" : 0.8,
+                        "density"     : 1.0,
+                        "shape"       :
+                        {
+                            "type"    : "circle",
+                            "size"    : 1.0
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "main":
+            {
+                "name": "BlocDusk"
+            },
+            "SpriteComponent":
+            {
+                "texture": "./assets/img/BlocDusk.jpg"
+            },
+            "PhysicBodyComponent":
+            {
+                "type"        : "dynamic",
+                "fixtures"    :
+                [
+                    {
+                        "friction"    : 0.9,
+                        "restitution" : 0.3,
+                        "density"     : 1.0,
+                        "shape"       :
+                        {
+                            "type"    : "box",
+                            "size"    : { "x" : 1.0, "y" : 1.0 }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "main":
+            {
+                "name": "BlocWood"
+            },
+            "SpriteComponent":
+            {
+                "texture": "./assets/img/BlocWood.jpg"
+            },
+            "PhysicBodyComponent":
+            {
+                "type"        : "static",
+                "fixtures"    :
+                [
+                    {
+                        "friction"    : 0.9,
+                        "restitution" : 0.0,
+                        "density"     : 1.0,
+                        "shape"       :
+                        {
+                            "type"    : "box",
+                            "size"    : { "x" : 1.0, "y" : 1.0 }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

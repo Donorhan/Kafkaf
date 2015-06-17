@@ -1,0 +1,1 @@
+java -jar compiler.jar  --compilation_level ADVANCED_OPTIMIZATIONS --language_in=ECMASCRIPT5_STRICT --js_output_file Kafkaf.debug.js `find ../src/ -name '*.js'`
