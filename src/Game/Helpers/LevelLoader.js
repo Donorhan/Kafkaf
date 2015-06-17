@@ -99,8 +99,12 @@ Kafkaf.Helpers.LevelLoader.prototype.loadFromData = function( data )
         }
         entity.addComponent(transformComponent);
 
+        // Set name.
+        if( entityData.name )
+            entity.setName(entityData.name);
+
         // Load others components.
-        this.entityBuilder.buildEntityFromPrefab(entity, entityData.name);
+        this.entityBuilder.buildEntityFromPrefab(entity, entityData.prefab);
     }
 
     return true;

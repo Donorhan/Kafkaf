@@ -107,4 +107,39 @@ Kafkaf.GameScene.prototype.render = function( deltaTime )
 Kafkaf.GameScene.prototype.onEvent = function( event )
 {
     this.world.sendEvent(new Kafkaf.UserEvent(event));
+
+    switch(event.type)
+    {
+        case Core.Event.Type.KeyDown:
+        {
+            var player = this.world.getEntityWithName("Player");
+            if( !player )
+                break;
+   
+            var physicBody = player.getComponent(Kafkaf.PhysicBodyComponent);
+            if( !physicBody )
+                break;
+
+            var currentVelocity = physicBody.getVelocity();
+            switch(event.key)
+            {
+                case 38: // Up
+                    physicBody.setLinearVelocity(currentVelocity[0], -10);
+                    break;
+                case 40: // Down
+                    physicBody.setLinearVelocity(currentVelocity[0], +10);
+                    break;
+                case 37: // Left
+                    physicBody.setLinearVelocity(-10,  currentVelocity[1]);
+                    break;
+                case 39: // Right
+                    physicBody.setLinearVelocity(+10,  currentVelocity[1]);
+                    break;
+                default:
+                    break;
+            }
+        }
+        default:
+            break;
+    }
 };

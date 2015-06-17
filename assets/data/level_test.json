@@ -2,37 +2,73 @@
     "entities":
     [
         {
-            "name"      : "BlocDusk",
+            "prefab"    : "BlocDusk",
             "position"  : { "x" : -3, "y" : -5 }
         },
         {
-            "name"      : "BlocDusk",
+            "prefab"    : "BlocDusk",
             "position"  : { "x" : -3.5, "y" : -7 }
         },
         {
-            "name"      : "BlocDusk",
+            "prefab"    : "BlocDusk",
             "position"  : { "x" : -2.5, "y" : -7 }
         },
         {
-            "name"      : "BlocDusk",
+            "prefab"    : "BlocDusk",
             "position"  : { "x" : -3, "y" : -10 }
         },
         {
-            "name"      : "BlocWood",
-            "position"  : { "x" :  0, "y" : 2 },
-            "scale"     : { "x" : 10, "y" : 1 }
+            "prefab"    : "BlocWood",
+            "position"  : { "x" : -3, "y" : 2 }
         },
         {
-            "name"      : "Football",
+            "prefab"    : "BlocWood",
+            "position"  : { "x" : -2, "y" : 2 }
+        },
+        {
+            "prefab"    : "BlocWood",
+            "position"  : { "x" : -1, "y" : 2 }
+        },
+        {
+            "prefab"    : "BlocWood",
+            "position"  : { "x" : 0, "y" : 2 }
+        },
+        {
+            "prefab"    : "BlocWood",
+            "position"  : { "x" : 1, "y" : 2 }
+        },
+        {
+            "prefab"    : "BlocWood",
+            "position"  : { "x" : 2, "y" : 2 }
+        },
+        {
+            "prefab"    : "BlocWood",
+            "position"  : { "x" : 3, "y" : 2 }
+        },
+        {
+            "prefab"    : "BlocWood",
+            "position"  : { "x" : 3, "y" : 1 }
+        },
+        {
+            "prefab"    : "BlocWood",
+            "position"  : { "x" : -3, "y" : 1 }
+        },
+        {
+            "prefab"    : "Football",
             "position"  : { "x" : 3, "y" : -5 }
         },
         {
-            "name"      : "Football",
+            "prefab"    : "Football",
             "position"  : { "x" : 3, "y" : -7 }
         },
         {
-            "name"      : "Football",
+            "prefab"    : "Football",
             "position"  : { "x" : 2.6, "y" : -9 }
+        },
+        {
+            "name"      : "Player",
+            "prefab"    : "BlocDusk",
+            "position"  : { "x" : 0, "y" : -0.1 }
         }
     ]
 }
