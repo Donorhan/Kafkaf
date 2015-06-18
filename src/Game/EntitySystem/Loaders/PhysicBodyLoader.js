@@ -46,6 +46,9 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
 
     var body = this.physicWorld.CreateBody(definition);
 
+    // Set fixed rotation.
+    body.SetFixedRotation((data.fixedRotation || false));
+
     // Create fixtures.
     for( var i = 0; i < data.fixtures.length; i++ )
     {
@@ -55,11 +58,15 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
         fixture.set_restitution(data.fixtures[i].restitution);
         fixture.set_isSensor(data.fixtures[i].sensor);
 
+        var offset = data.fixtures[i].shape.offset || { x : 0, y : 0};
+        var angle  = data.fixtures[i].shape.angle  || 0;
+
         if( data.fixtures[i].shape.type == "circle" )
         {
             var size = (data.fixtures[i].shape.size * transformComponent.scale.x * 0.5) - 0.01;
 
             var shape = new b2CircleShape();
+            shape.set_m_p(new b2Vec2(offset.x, offset.y));
             shape.set_m_radius(size);
             fixture.set_shape(shape);
         }
@@ -70,7 +77,7 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
             size.y = (data.fixtures[i].shape.size.y * transformComponent.scale.y * 0.5) - 0.01;
 
             var shape = new b2PolygonShape();
-            shape.SetAsBox(size.x, size.y);
+            shape.SetAsBox(size.x, size.y, new b2Vec2(offset.x, offset.y), angle);
             fixture.set_shape(shape);
         }   
         else
