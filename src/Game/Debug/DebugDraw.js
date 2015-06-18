@@ -81,10 +81,10 @@ Kafkaf.Debug.getPIXIDebugDraw = function( graphics )
         var origin = transform(newX, newY);
         var xAxis = transform(newX + 100, newY);
         var yAxis = transform(newX, newY + 100);
-        graphics.lineStyle(2, 'rgb(192,0,0)', 1);
+        graphics.lineStyle(0.01, 'rgb(192,0,0)', 1);
         graphics.moveTo(origin.x, origin.y);
         graphics.lineTo(xAxis.x, xAxis.y);
-        graphics.lineStyle(2, 'rgb(0,192,0)', 1);
+        graphics.lineStyle(0.01, 'rgb(0,192,0)', 1);
         graphics.moveTo(origin.x, origin.y);
         graphics.lineTo(yAxis.x, yAxis.y);
     }

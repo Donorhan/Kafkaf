@@ -46,6 +46,10 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
 
     var body = this.physicWorld.CreateBody(definition);
 
+    // Link body to the entity.
+    body.SetUserData(entity);   // Doesn't work with the emscripten portage …
+    body.userData = entity;     // … so we must "hack" like that, dirty I know ….
+
     // Set fixed rotation.
     body.SetFixedRotation((data.fixedRotation || false));
 

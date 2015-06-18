@@ -2,6 +2,7 @@ goog.provide('Kafkaf.GameScene');
 goog.require('Kafkaf.GameSystem');
 goog.require('Kafkaf.PhysicSystem');
 goog.require('Kafkaf.RendererSystem');
+goog.require('Kafkaf.CollisionListenerSystem');
 goog.require('Kafkaf.UserEvent');
 goog.require('Kafkaf.Helpers.LevelLoader');
 goog.require('Core.Event');
@@ -65,17 +66,22 @@ Kafkaf.GameScene.prototype.onActivation = function()
 Kafkaf.GameScene.prototype.onLoad = function()
 {
     // Add systems.
-    this.rendererSystem = new Kafkaf.RendererSystem("application");
-    this.world.addSystem(this.rendererSystem);
+    this.world.addSystem( new Kafkaf.RendererSystem("application") );
     this.world.addSystem( new Kafkaf.PhysicSystem() );
+    this.world.addSystem( new Kafkaf.CollisionListenerSystem() );
     this.world.addSystem( new Kafkaf.GameSystem() );
+
+    // Links.
+    this.rendererSystem             = this.world.getSystem(Kafkaf.RendererSystem);
+    var physicSystem                = this.world.getSystem(Kafkaf.PhysicSystem);
+    var collisionListenerSystem     = this.world.getSystem(Kafkaf.CollisionListenerSystem);
+    physicSystem.physicWorld.SetContactListener(collisionListenerSystem.getContactListener());
 
     // Init.
     this.levelLoader.init();
 
     // Debug physic.
     {
-        var physicSystem = this.world.getSystem(Kafkaf.PhysicSystem);
         var graphicDebugObject = physicSystem.activateDebug();
         this.rendererSystem.scene.addChild(graphicDebugObject);
     }
