@@ -27,7 +27,7 @@ Kafkaf.MoveSystem.prototype.update = function( deltaTime )
 
         var velocity = physicBodyComponent.getVelocity();
         if( moveComponent.normal == 0 )
-            velocity[0] *= 0.93;
+            velocity[0] *= moveComponent.decelerationScale;
         else if( moveComponent.normal < 0 )
             velocity[0] = -moveComponent.speed;
         else if( moveComponent.normal > 0 )
