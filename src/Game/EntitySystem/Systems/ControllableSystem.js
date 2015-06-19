@@ -1,6 +1,8 @@
 goog.provide('Kafkaf.ControllableSystem');
 goog.require('Kafkaf.ControllableComponent');
-goog.require('Kafkaf.UserEvent');
+goog.require('Kafkaf.Event.UserEvent');
+goog.require('Kafkaf.Event.JumpEvent');
+goog.require('Kafkaf.Event.MoveEvent');
 
 /**
 * Game system: Manage game's logic.
@@ -21,23 +23,17 @@ Kafkaf.ControllableSystem.prototype.update = function( deltaTime )
 {
     for( var i = 0; i < this.entities.length; i++ )
     {
-        var physicBodyComponent     = this.entities[i].getComponent(Kafkaf.PhysicBodyComponent);
-        var controllableComponent   = this.entities[i].getComponent(Kafkaf.ControllableComponent);
-
-        if( !physicBodyComponent || !controllableComponent )
-            continue;
-        
-        var currentVelocity = physicBodyComponent.getVelocity();
+        var controllableComponent = this.entities[i].getComponent(Kafkaf.ControllableComponent);
 
         if( controllableComponent.keyPressed[Kafkaf.ControllableComponent.ControlType.Up] == true )
-            physicBodyComponent.setLinearVelocity(currentVelocity[0], -10);
-        else if( controllableComponent.keyPressed[Kafkaf.ControllableComponent.ControlType.Down] == true )
-            physicBodyComponent.setLinearVelocity(currentVelocity[0], +10);
+            this.world.sendEvent( new Kafkaf.Event.JumpEvent(this.entities[i]) );
         
         if( controllableComponent.keyPressed[Kafkaf.ControllableComponent.ControlType.Left] == true )
-            physicBodyComponent.setLinearVelocity(-10,  currentVelocity[1]);        
+            this.world.sendEvent( new Kafkaf.Event.MoveEvent(this.entities[i], -1) );
         else if( controllableComponent.keyPressed[Kafkaf.ControllableComponent.ControlType.Right] == true )
-            physicBodyComponent.setLinearVelocity(+10,  currentVelocity[1]);
+            this.world.sendEvent( new Kafkaf.Event.MoveEvent(this.entities[i], +1) );
+        else 
+            this.world.sendEvent( new Kafkaf.Event.MoveEvent(this.entities[i],  0) );
     }
 };
 
@@ -47,7 +43,7 @@ Kafkaf.ControllableSystem.prototype.update = function( deltaTime )
 */
 Kafkaf.ControllableSystem.prototype.onEvent = function( event ) 
 {
-    if( event instanceof Kafkaf.UserEvent )
+    if( event instanceof Kafkaf.Event.UserEvent )
     {
         for( var i = 0; i < this.entities.length; i++ )
             this.processEvent(event.event, this.entities[i]);

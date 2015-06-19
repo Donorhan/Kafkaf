@@ -4,7 +4,9 @@ goog.require('Kafkaf.PhysicSystem');
 goog.require('Kafkaf.RendererSystem');
 goog.require('Kafkaf.CollisionListenerSystem');
 goog.require('Kafkaf.ControllableSystem');
-goog.require('Kafkaf.UserEvent');
+goog.require('Kafkaf.JumpSystem');
+goog.require('Kafkaf.MoveSystem');
+goog.require('Kafkaf.Event.UserEvent');
 goog.require('Kafkaf.Helpers.LevelLoader');
 goog.require('Core.Event');
 goog.require('Core.Scene');
@@ -65,6 +67,8 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left,    81 );
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   68 );
                     player.addComponent( controllableComponent );
+                    player.addComponent( new Kafkaf.MoveComponent() );
+                    player.addComponent( new Kafkaf.JumpComponent( 10, 1 ) );
                 }
 
                 // Temp: Add a controllable component here.
@@ -77,6 +81,8 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left,    37 );
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   39 );
                     player2.addComponent( controllableComponent );
+                    player2.addComponent( new Kafkaf.MoveComponent() );
+                    player2.addComponent( new Kafkaf.JumpComponent( 10, 1 ) );
                 }
             });
         }
@@ -94,6 +100,8 @@ Kafkaf.GameScene.prototype.onLoad = function()
     this.world.addSystem( new Kafkaf.CollisionListenerSystem() );
     this.world.addSystem( new Kafkaf.ControllableSystem() );
     this.world.addSystem( new Kafkaf.GameSystem() );
+    this.world.addSystem( new Kafkaf.JumpSystem() );
+    this.world.addSystem( new Kafkaf.MoveSystem() );
 
     // Links.
     this.rendererSystem             = this.world.getSystem(Kafkaf.RendererSystem);
@@ -143,5 +151,5 @@ Kafkaf.GameScene.prototype.render = function( deltaTime )
 */
 Kafkaf.GameScene.prototype.onEvent = function( event )
 {
-    this.world.sendEvent(new Kafkaf.UserEvent(event));
+    this.world.sendEvent( new Kafkaf.Event.UserEvent(event) );
 };

@@ -1,13 +1,13 @@
-goog.provide('Kafkaf.UserEvent');
+goog.provide('Kafkaf.Event.UserEvent');
 
 /**
 * Convert a Core.Event to an Event for the systems.
 *
 * @param {Core.Event} event An Event instance.
-* @augments ES.Event
+* @extends ES.Event
 * @constructor
 */
-Kafkaf.UserEvent = function( event )
+Kafkaf.Event.UserEvent = function( event )
 {
     /**
     * The core event instance.
@@ -15,4 +15,4 @@ Kafkaf.UserEvent = function( event )
     */
     this.event = event;
 }
-ES.Utils.extend(ES.Event, Kafkaf.UserEvent);
+ES.Utils.extend(ES.Event, Kafkaf.Event.UserEvent);
