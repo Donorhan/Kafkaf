@@ -3,6 +3,7 @@ goog.require('Kafkaf.GameSystem');
 goog.require('Kafkaf.PhysicSystem');
 goog.require('Kafkaf.RendererSystem');
 goog.require('Kafkaf.CollisionListenerSystem');
+goog.require('Kafkaf.ControllableSystem');
 goog.require('Kafkaf.UserEvent');
 goog.require('Kafkaf.Helpers.LevelLoader');
 goog.require('Core.Event');
@@ -54,7 +55,29 @@ Kafkaf.GameScene.prototype.onActivation = function()
             // Load level.
             _this.levelLoader.loadFromFile("./assets/data/level_test.json?" + Math.random(), function( success )
             {
+                // Temp: Add a controllable component here.
+                var player = _this.world.getEntityWithName("Player");
+                if( player )
+                {
+                    var controllableComponent = new Kafkaf.ControllableComponent();
+                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Up,      90 );
+                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Down,    83 );
+                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left,    81 );
+                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   68 );
+                    player.addComponent( controllableComponent );
+                }
 
+                // Temp: Add a controllable component here.
+                var player2 = _this.world.getEntityWithName("Player2");
+                if( player2 )
+                {
+                    var controllableComponent = new Kafkaf.ControllableComponent();
+                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Up,      38 );
+                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Down,    40 );
+                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left,    37 );
+                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   39 );
+                    player2.addComponent( controllableComponent );
+                }
             });
         }
     });
@@ -69,6 +92,7 @@ Kafkaf.GameScene.prototype.onLoad = function()
     this.world.addSystem( new Kafkaf.RendererSystem("application") );
     this.world.addSystem( new Kafkaf.PhysicSystem() );
     this.world.addSystem( new Kafkaf.CollisionListenerSystem() );
+    this.world.addSystem( new Kafkaf.ControllableSystem() );
     this.world.addSystem( new Kafkaf.GameSystem() );
 
     // Links.
@@ -120,39 +144,4 @@ Kafkaf.GameScene.prototype.render = function( deltaTime )
 Kafkaf.GameScene.prototype.onEvent = function( event )
 {
     this.world.sendEvent(new Kafkaf.UserEvent(event));
-
-    switch(event.type)
-    {
-        case Core.Event.Type.KeyDown:
-        {
-            var player = this.world.getEntityWithName("Player");
-            if( !player )
-                break;
-   
-            var physicBody = player.getComponent(Kafkaf.PhysicBodyComponent);
-            if( !physicBody )
-                break;
-
-            var currentVelocity = physicBody.getVelocity();
-            switch(event.key)
-            {
-                case 38: // Up
-                    physicBody.setLinearVelocity(currentVelocity[0], -10);
-                    break;
-                case 40: // Down
-                    physicBody.setLinearVelocity(currentVelocity[0], +10);
-                    break;
-                case 37: // Left
-                    physicBody.setLinearVelocity(-10,  currentVelocity[1]);
-                    break;
-                case 39: // Right
-                    physicBody.setLinearVelocity(+10,  currentVelocity[1]);
-                    break;
-                default:
-                    break;
-            }
-        }
-        default:
-            break;
-    }
 };

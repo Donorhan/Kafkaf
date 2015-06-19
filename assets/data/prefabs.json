@@ -12,8 +12,8 @@
             },
             "PhysicBodyComponent":
             {
-                "type"        : "dynamic",
-                "fixtures"    :
+                "type"          : "dynamic",
+                "fixtures"      :
                 [
                     {
                         "friction"    : 0.9,
@@ -40,11 +40,12 @@
             },
             "PhysicBodyComponent":
             {
-                "type"        : "dynamic",
-                "fixtures"    :
+                "type"          : "dynamic",
+                "fixedRotation" : true,
+                "fixtures"      :
                 [
                     {
-                        "friction"    : 0.9,
+                        "friction"    : 0.5,
                         "restitution" : 0.3,
                         "density"     : 1.0,
                         "sensor"      : false,
@@ -72,8 +73,8 @@
                 "fixtures"    :
                 [
                     {
-                        "friction"    : 0.9,
-                        "restitution" : 0.0,
+                        "friction"    : 0.4,
+                        "restitution" : 0.3,
                         "density"     : 1.0,
                         "sensor"      : false,
                         "shape"       :

@@ -2,56 +2,19 @@
     "entities":
     [
         {
+            "prefab"    : "BlocWood",
+            "position"  : { "x" :  0, "y" : 2 },
+            "scale"     : { "x" : 30, "y" : 1 }
+        },
+        {
+            "name"      : "Player",
             "prefab"    : "BlocDusk",
-            "position"  : { "x" : -3, "y" : -5 }
+            "position"  : { "x" : -1, "y" : -0.1 }
         },
         {
+            "name"      : "Player2",
             "prefab"    : "BlocDusk",
-            "position"  : { "x" : -3.5, "y" : -7 }
-        },
-        {
-            "prefab"    : "BlocDusk",
-            "position"  : { "x" : -2.5, "y" : -7 }
-        },
-        {
-            "prefab"    : "BlocDusk",
-            "position"  : { "x" : -3, "y" : -10 }
-        },
-        {
-            "prefab"    : "BlocWood",
-            "position"  : { "x" : -3, "y" : 2 }
-        },
-        {
-            "prefab"    : "BlocWood",
-            "position"  : { "x" : -2, "y" : 2 }
-        },
-        {
-            "prefab"    : "BlocWood",
-            "position"  : { "x" : -1, "y" : 2 }
-        },
-        {
-            "prefab"    : "BlocWood",
-            "position"  : { "x" : 0, "y" : 2 }
-        },
-        {
-            "prefab"    : "BlocWood",
-            "position"  : { "x" : 1, "y" : 2 }
-        },
-        {
-            "prefab"    : "BlocWood",
-            "position"  : { "x" : 2, "y" : 2 }
-        },
-        {
-            "prefab"    : "BlocWood",
-            "position"  : { "x" : 3, "y" : 2 }
-        },
-        {
-            "prefab"    : "BlocWood",
-            "position"  : { "x" : 3, "y" : 1 }
-        },
-        {
-            "prefab"    : "BlocWood",
-            "position"  : { "x" : -3, "y" : 1 }
+            "position"  : { "x" : 1, "y" : -0.1 }
         },
         {
             "prefab"    : "Football",
@@ -66,9 +29,12 @@
             "position"  : { "x" : 2.6, "y" : -9 }
         },
         {
-            "name"      : "Player",
-            "prefab"    : "BlocDusk",
-            "position"  : { "x" : 0, "y" : -0.1 }
+            "prefab"    : "Football",
+            "position"  : { "x" : -2.6, "y" : -9 }
+        },
+        {
+            "prefab"    : "Football",
+            "position"  : { "x" : -2.6, "y" : -9 }
         }
     ]
 }

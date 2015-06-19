@@ -18,7 +18,7 @@ Kafkaf.PhysicSystem = function()
     * The physic world.
     * @type {b2World}
     */
-    this.physicWorld = new b2World( new b2Vec2(0.0, 10.0) );
+    this.physicWorld = new b2World( new b2Vec2(0.0, 25.0) );
 
     /**
     * The graphic object where Box2D will draw in debug mode.

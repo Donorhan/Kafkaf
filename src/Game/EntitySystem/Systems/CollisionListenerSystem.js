@@ -9,6 +9,7 @@ goog.require('Kafkaf.CollisionListenerComponent');
 Kafkaf.CollisionListenerSystem = function()
 {
     ES.System.call(this, [Kafkaf.CollisionListenerComponent]);
+    this.setActif(false);
 
     /**
     * Box2D's contacts listener.
