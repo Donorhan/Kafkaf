@@ -16,28 +16,6 @@ Kafkaf.ControllableSystem = function()
 ES.Utils.extend(ES.System, Kafkaf.ControllableSystem);
 
 /**
-* System's entry point.
-* @param {number} deltaTime Time elasped since the last update.
-*/
-Kafkaf.ControllableSystem.prototype.update = function( deltaTime )
-{
-    for( var i = 0; i < this.entities.length; i++ )
-    {
-        var controllableComponent = this.entities[i].getComponent(Kafkaf.ControllableComponent);
-
-        if( controllableComponent.keyPressed[Kafkaf.ControllableComponent.ControlType.Up] == true )
-            this.world.sendEvent( new Kafkaf.Event.JumpEvent(this.entities[i]) );
-        
-        if( controllableComponent.keyPressed[Kafkaf.ControllableComponent.ControlType.Left] == true )
-            this.world.sendEvent( new Kafkaf.Event.MoveEvent(this.entities[i], -1) );
-        else if( controllableComponent.keyPressed[Kafkaf.ControllableComponent.ControlType.Right] == true )
-            this.world.sendEvent( new Kafkaf.Event.MoveEvent(this.entities[i], +1) );
-        else 
-            this.world.sendEvent( new Kafkaf.Event.MoveEvent(this.entities[i],  0) );
-    }
-};
-
-/**
 * Call when an event is received.
 * @param {ES.Event} event An ES.Event instance.
 */
@@ -67,7 +45,29 @@ Kafkaf.ControllableSystem.prototype.processEvent = function( event, entity )
                 break;
 
             var action = controllableComponent.convertToAction(event.key);
+
+            // Save key state.
             controllableComponent.keyPressed[action] = (event.type == Core.Event.Type.KeyDown);
+
+            // Convert key to action.
+            if( event.type == Core.Event.Type.KeyDown )
+            {
+                if( action == Kafkaf.ControllableComponent.ControlType.Up )
+                    this.world.sendEvent( new Kafkaf.Event.JumpEvent(entity) );
+                
+                if( action == Kafkaf.ControllableComponent.ControlType.Left )
+                    this.world.sendEvent( new Kafkaf.Event.MoveEvent(entity, -1) );
+                else if( action == Kafkaf.ControllableComponent.ControlType.Right )
+                    this.world.sendEvent( new Kafkaf.Event.MoveEvent(entity, +1) );
+            }
+            else if( event.type == Core.Event.Type.KeyUp )
+            {
+                if( !controllableComponent.keyPressed[Kafkaf.ControllableComponent.ControlType.Left] && 
+                    !controllableComponent.keyPressed[Kafkaf.ControllableComponent.ControlType.Right] )
+                {
+                    this.world.sendEvent( new Kafkaf.Event.MoveEvent(entity,  0) );                    
+                }
+            }
 
             break;
         }

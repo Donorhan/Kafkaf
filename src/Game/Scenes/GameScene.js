@@ -13,6 +13,7 @@ goog.require('Core.Scene');
 
 /**
 * The game scene: The most interesting scene, trust me.
+* @extends {Core.Scene}
 * @constructor
 */
 Kafkaf.GameScene = function()
@@ -68,7 +69,7 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   68 );
                     player.addComponent( controllableComponent );
                     player.addComponent( new Kafkaf.MoveComponent() );
-                    player.addComponent( new Kafkaf.JumpComponent( 10, 1 ) );
+                    player.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
                 }
 
                 // Temp: Add a controllable component here.
@@ -82,7 +83,7 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   39 );
                     player2.addComponent( controllableComponent );
                     player2.addComponent( new Kafkaf.MoveComponent() );
-                    player2.addComponent( new Kafkaf.JumpComponent( 10, 1 ) );
+                    player2.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
                 }
             });
         }

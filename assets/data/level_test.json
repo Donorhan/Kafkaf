@@ -2,7 +2,7 @@
     "entities":
     [
         {
-            "prefab"    : "BlocWood",
+            "prefab"    : "Ground",
             "position"  : { "x" :  0, "y" : 2 },
             "scale"     : { "x" : 30, "y" : 1 }
         },

@@ -62,38 +62,50 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
         fixture.set_restitution(data.fixtures[i].restitution);
         fixture.set_isSensor(data.fixtures[i].sensor);
 
-        var offset = data.fixtures[i].shape.offset || { x : 0, y : 0};
-        var angle  = data.fixtures[i].shape.angle  || 0;
-
-        if( data.fixtures[i].shape.type == "circle" )
+        // Shape stuff.
         {
-            var size = (data.fixtures[i].shape.size * transformComponent.scale.x * 0.5) - 0.01;
+            var offset = data.fixtures[i].shape.offset || { x : 0, y : 0};
+            var angle  = data.fixtures[i].shape.angle  || 0;
 
-            var shape = new b2CircleShape();
-            shape.set_m_p(new b2Vec2(offset.x, offset.y));
-            shape.set_m_radius(size);
-            fixture.set_shape(shape);
+            if( data.fixtures[i].shape.type == "circle" )
+            {
+                var size = (data.fixtures[i].shape.size * transformComponent.scale.x * 0.5) - 0.01;
+
+                var shape = new b2CircleShape();
+                shape.set_m_p(new b2Vec2(offset.x, offset.y));
+                shape.set_m_radius(size);
+                fixture.set_shape(shape);
+            }
+            else if( data.fixtures[i].shape.type == "box" ) 
+            {
+                var size = {};
+                size.x = (data.fixtures[i].shape.size.x * transformComponent.scale.x * 0.5) - 0.01;
+                size.y = (data.fixtures[i].shape.size.y * transformComponent.scale.y * 0.5) - 0.01;
+
+                var shape = new b2PolygonShape();
+                shape.SetAsBox(size.x, size.y, new b2Vec2(offset.x, offset.y), angle);
+                fixture.set_shape(shape);
+            }   
+            else
+            {
+                var vertices = [];
+                for( var j = 0; j < data.fixtures[i].shape.vertices.length; j++ )
+                    vertices.push( new b2Vec2( data.fixtures[i].shape.vertices[j].x, data.fixtures[i].shape.vertices[j].y ) );
+
+                fixture.set_shape(createPolygonShape(vertices));
+            }
         }
-        else if( data.fixtures[i].shape.type == "box" ) 
+        
+        // Filters.
+        if( data.fixtures[i].filter )  
         {
-            var size = {};
-            size.x = (data.fixtures[i].shape.size.x * transformComponent.scale.x * 0.5) - 0.01;
-            size.y = (data.fixtures[i].shape.size.y * transformComponent.scale.y * 0.5) - 0.01;
-
-            var shape = new b2PolygonShape();
-            shape.SetAsBox(size.x, size.y, new b2Vec2(offset.x, offset.y), angle);
-            fixture.set_shape(shape);
-        }   
-        else
-        {
-            var vertices = [];
-            for( var j = 0; j < data.fixtures[i].shape.vertices.length; j++ )
-                vertices.push( new b2Vec2( data.fixtures[i].shape.vertices[j].x, data.fixtures[i].shape.vertices[j].y ) );
-
-            fixture.set_shape(createPolygonShape(vertices));
+            fixture.set_filter.categoryBits = data.fixtures[i].filter.category || 0x0001;
+            fixture.set_filter.maskBits = data.fixtures[i].filter.mask || 0xFFFF;
+            fixture.set_filter.groupIndex = data.fixtures[i].filter.group || 0;
         }
 
-        body.CreateFixture(fixture);
+        var resultFixture = body.CreateFixture(fixture);
+        resultFixture.userData = data.fixtures[i].name || null; // Hack: set_userData didn't work with strings (Box2D JS bug)
     }
 
     // Set position.

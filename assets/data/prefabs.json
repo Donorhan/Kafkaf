@@ -45,6 +45,7 @@
                 "fixtures"      :
                 [
                     {
+                        "name"        : "body",
                         "friction"    : 0.5,
                         "restitution" : 0.3,
                         "density"     : 1.0,
@@ -53,6 +54,29 @@
                         {
                             "type"    : "box",
                             "size"    : { "x" : 1.0, "y" : 1.0 }
+                        },
+                        "filter"      :
+                        {
+                            "category": 8,
+                            "mask"    : 5
+                        }
+                    },
+                    {
+                        "name"        : "bottom",
+                        "friction"    : 0.5,
+                        "restitution" : 0.3,
+                        "density"     : 1.0,
+                        "sensor"      : true,
+                        "shape"       :
+                        {
+                            "type"    : "box",
+                            "size"    : { "x" : 1.0, "y" : 0.2 },                            
+                            "offset"  : { "x" : 0.0, "y" : 0.5 }
+                        },
+                        "filter"      :
+                        {
+                            "category": 128,
+                            "mask"    : 4
                         }
                     }
                 ]
@@ -61,7 +85,7 @@
         {
             "main":
             {
-                "name": "BlocWood"
+                "name": "Ground"
             },
             "SpriteComponent":
             {
@@ -81,8 +105,15 @@
                         {
                             "type"    : "box",
                             "size"    : { "x" : 1.0, "y" : 1.0 }
+                        },
+                        "filter"      :
+                        {
+                            "category": 1,
+                            "mask"    : 12,
+                            "group"   : 1
                         }
                     }
+
                 ]
             }
         }
