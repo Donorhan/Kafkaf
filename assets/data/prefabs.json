@@ -17,7 +17,7 @@
                 [
                     {
                         "friction"    : 0.9,
-                        "restitution" : 0.8,
+                        "restitution" : 0.6,
                         "density"     : 1.0,
                         "sensor"      : false,
                         "shape"       :

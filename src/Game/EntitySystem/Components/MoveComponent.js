@@ -23,6 +23,12 @@ Kafkaf.MoveComponent = function( speed )
     this.speed = speed || 10.0;
 
     /**
+    * Acceleration scale.
+    * @type {number}
+    */
+    this.accelerationScale = 1.5;
+
+    /**
     * Deceleration scale.
     * @type {number}
     */

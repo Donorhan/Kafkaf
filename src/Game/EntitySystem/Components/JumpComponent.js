@@ -29,5 +29,18 @@ Kafkaf.JumpComponent = function( force, max )
     */
     this.count = 0;
 
+    /**
+    * Counter used to stop "jump spam".
+    * @type {number}
+    * @see timeBetweenJump
+    */
+    this.jumpTimeOut = 0;
+
+    /**
+    * Time to wait between two jumps (in milliseconds).
+    * @type {number}
+    */
+    this.timeBetweenJump = 250;
+
 }
 ES.Utils.extend(ES.Component, Kafkaf.JumpComponent);
