@@ -70,6 +70,10 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     player.addComponent( controllableComponent );
                     player.addComponent( new Kafkaf.MoveComponent() );
                     player.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
+
+                    var collisionListener = new Kafkaf.CollisionListenerComponent();
+                    collisionListener[0] = "playerBegin";
+                    player.addComponent(collisionListener);
                 }
 
                 // Temp: Add a controllable component here.
@@ -84,6 +88,10 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     player2.addComponent( controllableComponent );
                     player2.addComponent( new Kafkaf.MoveComponent() );
                     player2.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
+
+                    var collisionListener = new Kafkaf.CollisionListenerComponent();
+                    collisionListener[0] = "playerBegin";
+                    player2.addComponent(collisionListener);
                 }
             });
         }
@@ -109,6 +117,9 @@ Kafkaf.GameScene.prototype.onLoad = function()
     var physicSystem                = this.world.getSystem(Kafkaf.PhysicSystem);
     var collisionListenerSystem     = this.world.getSystem(Kafkaf.CollisionListenerSystem);
     physicSystem.physicWorld.SetContactListener(collisionListenerSystem.getContactListener());
+
+    // Link collision solvers to the right system.
+    addCollisionSolvers(collisionListenerSystem);
 
     // Init.
     this.levelLoader.init();

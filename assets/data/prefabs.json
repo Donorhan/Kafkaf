@@ -91,6 +91,10 @@
             {
                 "texture": "./assets/img/BlocWood.jpg"
             },
+            "CollisionListenerComponent":
+            {
+                "begin"       : "beginGround"
+            },
             "PhysicBodyComponent":
             {
                 "type"        : "static",
