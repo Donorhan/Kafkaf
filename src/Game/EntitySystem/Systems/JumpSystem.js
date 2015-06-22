@@ -34,18 +34,24 @@ Kafkaf.JumpSystem.prototype.onEvent = function( event )
 {
     if( event instanceof Kafkaf.Event.JumpEvent )
     {
-        var jumpComponent       = event.entity.getComponent(Kafkaf.JumpComponent);
-        var physicBodyComponent = event.entity.getComponent(Kafkaf.PhysicBodyComponent);
-        if( physicBodyComponent && jumpComponent )
-        {
-            if( jumpComponent.count < jumpComponent.max && jumpComponent.jumpTimeOut <= 0 )
-            {
-                var currentVelocity = physicBodyComponent.getVelocity();
-                physicBodyComponent.setLinearVelocity(currentVelocity[0], -jumpComponent.force);
+        var jumpComponent = event.entity.getComponent(Kafkaf.JumpComponent);
 
-                jumpComponent.count++;
-                jumpComponent.jumpTimeOut = jumpComponent.timeBetweenJump;
-            }
+        if( event.type == Kafkaf.Event.JumpEvent.Type.AskToJump )
+        {
+            var physicBodyComponent = event.entity.getComponent(Kafkaf.PhysicBodyComponent);
+            if( physicBodyComponent && jumpComponent )
+            {
+                if( jumpComponent.count < jumpComponent.max && jumpComponent.jumpTimeOut <= 0 )
+                {
+                    var currentVelocity = physicBodyComponent.getVelocity();
+                    physicBodyComponent.setLinearVelocity(currentVelocity[0], -jumpComponent.force);
+
+                    jumpComponent.count++;
+                    jumpComponent.jumpTimeOut = jumpComponent.timeBetweenJump;
+                }
+            }     
         }
+        else if( event.type == Kafkaf.Event.JumpEvent.Type.ResetCounter )           
+            jumpComponent.count = 0;
     }
 };

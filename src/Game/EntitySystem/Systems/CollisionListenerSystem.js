@@ -94,8 +94,13 @@ Kafkaf.CollisionListenerSystem.notifyEntities = function( contact, type )
 
     if( fixtureA && fixtureB )
     {
-        var entityA = fixtureA.GetBody().userData;
-        var entityB = fixtureB.GetBody().userData;
+        var entityA         = fixtureA.GetBody().userData;
+        var entityB         = fixtureB.GetBody().userData;
+        var collisionData   = new Kafkaf.CollisionData();
+
+        // Get contact data.
+        collisionData.normal[0] = contact.GetManifold().get_localNormal().get_x();
+        collisionData.normal[1] = contact.GetManifold().get_localNormal().get_y();
 
         // Notify entity A.
         var compA = entityA.getComponent(Kafkaf.CollisionListenerComponent);
@@ -103,7 +108,13 @@ Kafkaf.CollisionListenerSystem.notifyEntities = function( contact, type )
         {
             var callback = Kafkaf.CollisionListenerSystem.callbacks[compA[type]];
             if( callback )
-                callback( contact );
+            {
+                collisionData.entityA   = entityA;
+                collisionData.entityB   = entityB;
+                collisionData.fixtureA  = fixtureA;
+                collisionData.fixtureB  = fixtureB;
+                callback( collisionData );
+            }
         }
 
         // Notify entity B.
@@ -112,7 +123,13 @@ Kafkaf.CollisionListenerSystem.notifyEntities = function( contact, type )
         {
             var callback = Kafkaf.CollisionListenerSystem.callbacks[compB[type]];
             if( callback )
-                callback( contact );
+            {
+                collisionData.entityA   = entityB;
+                collisionData.entityB   = entityA;
+                collisionData.fixtureA  = fixtureB;
+                collisionData.fixtureB  = fixtureA;
+                callback( collisionData );
+            }
         }
     }
 };

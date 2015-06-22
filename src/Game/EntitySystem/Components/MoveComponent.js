@@ -35,6 +35,12 @@ Kafkaf.MoveComponent = function( speed )
     this.decelerationScale = 0.93;
 
     /**
+    * Air resistance scale.
+    * @type {number}
+    */
+    this.airResistanceScale = 0.995;
+
+    /**
     * Movement's normal: We are working in a 1D plan (2D game/horizontal axis only) so one value suffice.
     * @type {number}
     */

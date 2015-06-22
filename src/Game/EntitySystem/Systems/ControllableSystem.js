@@ -53,7 +53,7 @@ Kafkaf.ControllableSystem.prototype.processEvent = function( event, entity )
             if( event.type == Core.Event.Type.KeyDown )
             {
                 if( action == Kafkaf.ControllableComponent.ControlType.Up )
-                    this.world.sendEvent( new Kafkaf.Event.JumpEvent(entity) );
+                    this.world.sendEvent( new Kafkaf.Event.JumpEvent(Kafkaf.Event.JumpEvent.Type.AskToJump, entity) );
                 
                 if( action == Kafkaf.ControllableComponent.ControlType.Left )
                     this.world.sendEvent( new Kafkaf.Event.MoveEvent(entity, -1) );

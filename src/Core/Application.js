@@ -85,3 +85,12 @@ Core.Application.prototype.onEvent = function( event )
     if( this.game )
         this.game.onEvent(event);
 };
+
+/**
+* Get Game's instance.
+* @return {Core.Game} A game instance. 
+*/
+Core.Application.prototype.getGame = function()
+{
+    return this.game;
+};

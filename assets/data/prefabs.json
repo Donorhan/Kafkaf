@@ -46,8 +46,8 @@
                 [
                     {
                         "name"        : "body",
-                        "friction"    : 0.5,
-                        "restitution" : 0.3,
+                        "friction"    : 0.0,
+                        "restitution" : 0.2,
                         "density"     : 1.0,
                         "sensor"      : false,
                         "shape"       :
@@ -70,7 +70,7 @@
                         "shape"       :
                         {
                             "type"    : "box",
-                            "size"    : { "x" : 1.0, "y" : 0.2 },                            
+                            "size"    : { "x" : 0.9, "y" : 0.2 },                            
                             "offset"  : { "x" : 0.0, "y" : 0.5 }
                         },
                         "filter"      :
@@ -101,8 +101,8 @@
                 "fixtures"    :
                 [
                     {
-                        "friction"    : 0.4,
-                        "restitution" : 0.3,
+                        "friction"    : 0.1,
+                        "restitution" : 0.1,
                         "density"     : 1.0,
                         "sensor"      : false,
                         "shape"       :

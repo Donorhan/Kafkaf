@@ -72,7 +72,7 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     player.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
 
                     var collisionListener = new Kafkaf.CollisionListenerComponent();
-                    collisionListener[0] = "playerBegin";
+                    collisionListener[0] = "characterBegin";
                     player.addComponent(collisionListener);
                 }
 
@@ -90,7 +90,7 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     player2.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
 
                     var collisionListener = new Kafkaf.CollisionListenerComponent();
-                    collisionListener[0] = "playerBegin";
+                    collisionListener[0] = "characterBegin";
                     player2.addComponent(collisionListener);
                 }
             });
@@ -164,4 +164,13 @@ Kafkaf.GameScene.prototype.render = function( deltaTime )
 Kafkaf.GameScene.prototype.onEvent = function( event )
 {
     this.world.sendEvent( new Kafkaf.Event.UserEvent(event) );
+};
+
+/**
+* Get the world instance.
+* @return {ES.World} An ES.World instance. 
+*/
+Kafkaf.GameScene.prototype.getWorld = function()
+{
+    return this.world;
 };
