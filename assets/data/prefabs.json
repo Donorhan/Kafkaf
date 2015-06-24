@@ -46,7 +46,7 @@
                 [
                     {
                         "name"        : "body",
-                        "friction"    : 0.0,
+                        "friction"    : 0.1,
                         "restitution" : 0.2,
                         "density"     : 1.0,
                         "sensor"      : false,
@@ -57,26 +57,38 @@
                         },
                         "filter"      :
                         {
-                            "category": 8,
-                            "mask"    : 5
+                            "category": 2,
+                            "mask"    : 7
                         }
                     },
                     {
-                        "name"        : "bottom",
-                        "friction"    : 0.5,
-                        "restitution" : 0.3,
-                        "density"     : 1.0,
+                        "name"        : "foot",
                         "sensor"      : true,
                         "shape"       :
                         {
                             "type"    : "box",
-                            "size"    : { "x" : 0.9, "y" : 0.2 },                            
+                            "size"    : { "x" : 0.8, "y" : 0.2 },                            
                             "offset"  : { "x" : 0.0, "y" : 0.5 }
                         },
                         "filter"      :
                         {
-                            "category": 128,
-                            "mask"    : 4
+                            "category": 2,
+                            "mask"    : 1
+                        }
+                    },
+                    {
+                        "name"        : "head",
+                        "sensor"      : true,
+                        "shape"       :
+                        {
+                            "type"    : "box",
+                            "size"    : { "x" : 1.0, "y" : 0.2 },                            
+                            "offset"  : { "x" : 0.0, "y" : -0.5 }
+                        },
+                        "filter"      :
+                        {
+                            "category": 4,
+                            "mask"    : 2
                         }
                     }
                 ]
@@ -101,7 +113,7 @@
                 "fixtures"    :
                 [
                     {
-                        "friction"    : 0.1,
+                        "friction"    : 0.2,
                         "restitution" : 0.1,
                         "density"     : 1.0,
                         "sensor"      : false,
@@ -112,9 +124,7 @@
                         },
                         "filter"      :
                         {
-                            "category": 1,
-                            "mask"    : 12,
-                            "group"   : 1
+                            "category": 1
                         }
                     }
 

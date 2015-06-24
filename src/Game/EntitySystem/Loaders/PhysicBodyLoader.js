@@ -57,10 +57,10 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
     for( var i = 0; i < data.fixtures.length; i++ )
     {
         var fixture = new b2FixtureDef();
-        fixture.set_density(data.fixtures[i].density);
-        fixture.set_friction(data.fixtures[i].friction);
-        fixture.set_restitution(data.fixtures[i].restitution);
-        fixture.set_isSensor(data.fixtures[i].sensor);
+        fixture.set_density(data.fixtures[i].density || 1.0);
+        fixture.set_friction(data.fixtures[i].friction || 0.1);
+        fixture.set_restitution(data.fixtures[i].restitution || 0.2);
+        fixture.set_isSensor(data.fixtures[i].sensor || false);
 
         // Shape stuff.
         {
@@ -99,9 +99,9 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
         // Filters.
         if( data.fixtures[i].filter )  
         {
-            fixture.set_filter.categoryBits = data.fixtures[i].filter.category || 0x0001;
-            fixture.set_filter.maskBits = data.fixtures[i].filter.mask || 0xFFFF;
-            fixture.set_filter.groupIndex = data.fixtures[i].filter.group || 0;
+            fixture.get_filter().set_categoryBits( (data.fixtures[i].filter.category != undefined ) ? data.fixtures[i].filter.category : 0x0001 );
+            fixture.get_filter().set_maskBits( (data.fixtures[i].filter.mask != undefined ) ? data.fixtures[i].filter.mask : 0xFFFF );
+            fixture.get_filter().set_groupIndex( (data.fixtures[i].filter.group != undefined ) ? data.fixtures[i].filter.group : 0 );
         }
 
         var resultFixture = body.CreateFixture(fixture);

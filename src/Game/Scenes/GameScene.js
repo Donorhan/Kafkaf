@@ -73,6 +73,7 @@ Kafkaf.GameScene.prototype.onActivation = function()
 
                     var collisionListener = new Kafkaf.CollisionListenerComponent();
                     collisionListener[0] = "characterBegin";
+                    collisionListener[1] = "characterEnd";
                     player.addComponent(collisionListener);
                 }
 
@@ -91,6 +92,7 @@ Kafkaf.GameScene.prototype.onActivation = function()
 
                     var collisionListener = new Kafkaf.CollisionListenerComponent();
                     collisionListener[0] = "characterBegin";
+                    collisionListener[1] = "characterEnd";
                     player2.addComponent(collisionListener);
                 }
             });

@@ -7,34 +7,23 @@
             "scale"     : { "x" : 30, "y" : 1 }
         },
         {
+            "prefab"    : "Ground",
+            "position"  : { "x" : 0, "y" : 0 },
+            "scale"     : { "x" : 0.1, "y" : 4 }
+        },
+        {
             "name"      : "Player",
             "prefab"    : "BlocDusk",
-            "position"  : { "x" : -1, "y" : -0.1 }
+            "position"  : { "x" : -2, "y" : -0.1 }
         },
         {
             "name"      : "Player2",
             "prefab"    : "BlocDusk",
-            "position"  : { "x" : 1, "y" : -0.1 }
+            "position"  : { "x" : 2, "y" : -0.1 }
         },
         {
             "prefab"    : "Football",
-            "position"  : { "x" : 3, "y" : -5 }
-        },
-        {
-            "prefab"    : "Football",
-            "position"  : { "x" : 3, "y" : -7 }
-        },
-        {
-            "prefab"    : "Football",
-            "position"  : { "x" : 2.6, "y" : -9 }
-        },
-        {
-            "prefab"    : "Football",
-            "position"  : { "x" : -2.6, "y" : -9 }
-        },
-        {
-            "prefab"    : "Football",
-            "position"  : { "x" : -2.6, "y" : -9 }
+            "position"  : { "x" : 0, "y" : -5 }
         }
     ]
 }

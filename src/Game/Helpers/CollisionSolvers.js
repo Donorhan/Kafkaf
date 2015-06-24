@@ -1,4 +1,5 @@
 goog.require('Kafkaf.PhysicBodyComponent');
+goog.require('Kafkaf.Event.DamageEvent');
 goog.require('Kafkaf.Event.JumpEvent');
 goog.require('Core.Application');
 
@@ -23,22 +24,24 @@ function addCollisionSolvers( system )
 
     system.registerCollisionSolver("characterBegin", function( contact )
     {
-        var fixtureA = contact.fixtureA;
-        if( fixtureA.userData == "body" )
+        if( contact.fixtureA.userData == "foot" )
         {
-            if( fixtureA.GetBody().GetLinearVelocity().get_y() > 0 )
-                getWorld().sendEvent( new Kafkaf.Event.JumpEvent(Kafkaf.Event.JumpEvent.Type.ResetCounter, fixtureA.GetBody().userData) );
+            getWorld().sendEvent( new Kafkaf.Event.JumpEvent(Kafkaf.Event.JumpEvent.Type.ResetCounter, contact.fixtureA.GetBody().userData) );
+        }
+        else if( contact.fixtureA.userData == "head" )
+        {
+            // Send damage event.
+            getWorld().sendEvent( new Kafkaf.Event.DamageEvent(contact.fixtureA.GetBody().userData, contact.fixtureB.GetBody().userData) );
+
+            // Bounce effect.
+            var velocity = contact.fixtureB.GetBody().GetLinearVelocity().get_x();
+            var force = contact.fixtureB.GetBody().GetMass() * 5;
+            contact.fixtureB.GetBody().SetLinearVelocity(new b2Vec2(velocity, -force));
         }
     });
 
     system.registerCollisionSolver("characterEnd", function( contact )
     {
-        /*var fixtureA    = contact.GetFixtureA();
-        var fixtureB    = contact.GetFixtureB();
 
-        if( fixtureA.userData == "body" )
-        {
-
-        }*/
     });
 }

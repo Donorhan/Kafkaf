@@ -29,41 +29,45 @@ Kafkaf.MoveSystem.prototype.update = function( deltaTime )
         var isInAir             = (Math.abs(velocity[1]) > 0.2);
 
         // Specific logic for the ground.
-        if( !isInAir )
-        {
+        var desiredVelocity = velocity[0];
+       /* if( !isInAir )
+        {*/
             if( moveComponent.normal < 0 )
-                velocity[0] = Math.max( velocity[0] - moveComponent.accelerationScale, -moveComponent.speed );
+                desiredVelocity = Math.max( velocity[0] - moveComponent.accelerationScale, -moveComponent.speed );
             else if( moveComponent.normal > 0 )
-                velocity[0] = Math.min( velocity[0] + moveComponent.accelerationScale, +moveComponent.speed );
+                desiredVelocity = Math.min( velocity[0] + moveComponent.accelerationScale, +moveComponent.speed );
             else
-                velocity[0] *= moveComponent.decelerationScale;
-        }
+                desiredVelocity *= moveComponent.decelerationScale;
+       /* }
         else
         {
             if( moveComponent.normal < 0 )
             {
                 // Change direction in air: reduce speed.
-                if( velocity[0] > 0 )
-                    velocity[0] *= 0.65;
+                if( desiredVelocity > 0 )
+                    desiredVelocity *= 0.65;
 
-                velocity[0] = -Math.abs(velocity[0]);
-                velocity[0] =  Math.min(velocity[0], -5.5);
+                desiredVelocity = -Math.abs(desiredVelocity);
+                desiredVelocity =  Math.min(desiredVelocity, -2.5);
             }
             else if( moveComponent.normal > 0 )
             {
                 // Change direction in air: reduce speed.
-                if( velocity[0] < 0 )
-                    velocity[0] *= 0.65;
+                if( desiredVelocity < 0 )
+                    desiredVelocity *= 0.65;
 
-                velocity[0] = Math.abs(velocity[0]);
-                velocity[0] = Math.max(velocity[0], 5.5);
+                desiredVelocity = Math.abs(desiredVelocity);
+                desiredVelocity = Math.max(desiredVelocity, 2.5);
             }
 
-            velocity[0] *= moveComponent.airResistanceScale;
-        }
+            desiredVelocity *= moveComponent.airResistanceScale;
+        }*/
 
-        if( velocity[0] != 0 )
-            physicBodyComponent.setLinearVelocity(velocity[0],  velocity[1]);
+        var dvx         = desiredVelocity - velocity[0];
+        var mass        = physicBodyComponent.getMass();
+        var impulseX    = mass * dvx;
+        if( impulseX )
+            physicBodyComponent.applyLinearImpulse( [impulseX, 0], [0, 0] );
     }
 };
 
