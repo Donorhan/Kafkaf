@@ -62,12 +62,12 @@
         },
         {
             "name"      : "Player",
-            "prefab"    : "BlocDusk",
+            "prefab"    : "Character",
             "position"  : { "x" : -2, "y" : -0.1 }
         },
         {
             "name"      : "Player2",
-            "prefab"    : "BlocDusk",
+            "prefab"    : "Character",
             "position"  : { "x" : 2, "y" : -0.1 }
         },
         {
@@ -95,16 +95,12 @@
             "position"  : { "x" : -8, "y" : -19 }
         },
         {
-            "prefab"    : "Football",
-            "position"  : { "x" : -8, "y" : -20 }
+            "prefab"    : "Saw",
+            "position"  : { "x" : 0, "y" : -7 }
         },
         {
-            "prefab"    : "Football",
-            "position"  : { "x" : -8, "y" : -21 }
-        },
-        {
-            "prefab"    : "Football",
-            "position"  : { "x" : -8, "y" : -22 }
+            "prefab"    : "Saw",
+            "position"  : { "x" : -8.5, "y" : -6.5 }
         }
     ]
 }

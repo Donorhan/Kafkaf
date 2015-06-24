@@ -24,6 +24,11 @@
                         {
                             "type"    : "circle",
                             "size"    : 0.6
+                        },
+                        "filter"      :
+                        {
+                            "category": 16,
+                            "mask"    : 27
                         }
                     }
                 ]
@@ -32,11 +37,7 @@
         {
             "main":
             {
-                "name": "BlocDusk"
-            },
-            "SpriteComponent":
-            {
-                "texture": "./assets/img/BlocDusk.jpg"
+                "name": "Character"
             },
             "PhysicBodyComponent":
             {
@@ -58,7 +59,7 @@
                         "filter"      :
                         {
                             "category": 2,
-                            "mask"    : 7
+                            "mask"    : 31
                         }
                     },
                     {
@@ -128,6 +129,50 @@
                         }
                     }
 
+                ]
+            }
+        },
+        {
+            "main":
+            {
+                "name": "Saw"
+            },
+            "CollisionListenerComponent":
+            {
+                "begin"       : "beginGround"
+            },
+            "PhysicBodyComponent":
+            {
+                "type"        : "kinematic",
+                "fixtures"    :
+                [
+                    {
+                        "friction"    : 0.0,
+                        "restitution" : 0.1,
+                        "density"     : 1.0,
+                        "sensor"      : false,
+                        "shape"       :
+                        {
+                            "type"    : "box",
+                            "size"    : { "x" : 0.2, "y" : 2.0 }
+                        },
+                        "filter"      :
+                        {
+                            "category": 8,
+                            "mask"    : 18
+                        }
+                    }
+
+                ]
+            },
+            "AIComponent":
+            {
+                "types"        :
+                [
+                    {
+                        "name"  : "AutomaticRotation",
+                        "value" : 10
+                    }
                 ]
             }
         }

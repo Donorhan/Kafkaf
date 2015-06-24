@@ -1,4 +1,5 @@
 goog.provide('Kafkaf.GameScene');
+goog.require('Kafkaf.AISystem');
 goog.require('Kafkaf.GameSystem');
 goog.require('Kafkaf.PhysicSystem');
 goog.require('Kafkaf.RendererSystem');
@@ -109,6 +110,7 @@ Kafkaf.GameScene.prototype.onActivation = function()
 Kafkaf.GameScene.prototype.onLoad = function()
 {
     // Add systems.
+    this.world.addSystem( new Kafkaf.AISystem() );
     this.world.addSystem( new Kafkaf.RendererSystem("application") );
     this.world.addSystem( new Kafkaf.PhysicSystem() );
     this.world.addSystem( new Kafkaf.CollisionListenerSystem() );

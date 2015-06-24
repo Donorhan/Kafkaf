@@ -1,5 +1,6 @@
 goog.provide('Kafkaf.Helpers.LevelLoader');
 goog.require('Kafkaf.Helpers.EntityBuilder');
+goog.require('Kafkaf.Loaders.AILoader');
 goog.require('Kafkaf.Loaders.CollisionListenerLoader');
 goog.require('Kafkaf.Loaders.PhysicBodyLoader');
 goog.require('Kafkaf.Loaders.SpriteLoader');
@@ -34,7 +35,7 @@ Kafkaf.Helpers.LevelLoader = function( world )
 */
 Kafkaf.Helpers.LevelLoader.prototype.init = function()
 {
-    // Init loaders.
+    this.entityBuilder.registerLoader("AIComponent", new Kafkaf.Loaders.AILoader(this.world.getSystem(Kafkaf.AISystem)) );
     this.entityBuilder.registerLoader("CollisionListenerComponent", new Kafkaf.Loaders.CollisionListenerLoader(this.world.getSystem(Kafkaf.PhysicSystem)) );
     this.entityBuilder.registerLoader("PhysicBodyComponent", new Kafkaf.Loaders.PhysicBodyLoader(this.world.getSystem(Kafkaf.PhysicSystem)) );
     this.entityBuilder.registerLoader("SpriteComponent", new Kafkaf.Loaders.SpriteLoader(this.world.getSystem(Kafkaf.RendererSystem)) );

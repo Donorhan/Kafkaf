@@ -128,6 +128,7 @@ Kafkaf.PhysicBodyComponent.prototype.setLinearVelocity = function( x, y )
 */
 Kafkaf.PhysicBodyComponent.prototype.applyForce = function( force, point )
 {
+    this.instance.SetAwake(true);
     this.instance.ApplyForce(new b2Vec2(force[0], force[1]), new b2Vec2(point[0], point[1]), true);
 };
 
@@ -137,6 +138,7 @@ Kafkaf.PhysicBodyComponent.prototype.applyForce = function( force, point )
 */
 Kafkaf.PhysicBodyComponent.prototype.applyAngularImpulse = function( impulse )
 {
+    this.instance.SetAwake(true);
     this.instance.ApplyAngularImpulse(impulse, true);
 };
 
@@ -147,6 +149,7 @@ Kafkaf.PhysicBodyComponent.prototype.applyAngularImpulse = function( impulse )
 */
 Kafkaf.PhysicBodyComponent.prototype.applyLinearImpulse = function( force, point )
 {
+    this.instance.SetAwake(true);
     this.instance.ApplyLinearImpulse( new b2Vec2(force[0], force[1]), new b2Vec2(point[0], point[1]), true );
 };
 
@@ -156,6 +159,7 @@ Kafkaf.PhysicBodyComponent.prototype.applyLinearImpulse = function( force, point
 */
 Kafkaf.PhysicBodyComponent.prototype.applyTorque = function( torque )
 {
+    this.instance.SetAwake(true);
     this.instance.ApplyTorque(torque, true);
 };
 
