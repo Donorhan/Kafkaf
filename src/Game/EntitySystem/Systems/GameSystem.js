@@ -1,4 +1,5 @@
 goog.provide('Kafkaf.GameSystem');
+goog.require('Kafkaf.Event.DeadEvent');
 
 /**
 * Game system: Manage game's logic.
@@ -18,4 +19,16 @@ ES.Utils.extend(ES.System, Kafkaf.GameSystem);
 Kafkaf.GameSystem.prototype.update = function( deltaTime )
 {
     
+};
+
+/**
+* Call when an event is received.
+* @param {ES.Event} event An ES.Event instance.
+*/
+Kafkaf.GameSystem.prototype.onEvent = function( event ) 
+{
+    if( event instanceof Kafkaf.Event.DeadEvent )
+    {
+    	this.world.destroyEntity(event.victim);
+    }
 };

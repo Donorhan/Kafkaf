@@ -25,18 +25,19 @@ function addCollisionSolvers( system )
     system.registerCollisionSolver("characterBegin", function( contact )
     {
         if( contact.fixtureA.userData == "foot" )
-        {
             getWorld().sendEvent( new Kafkaf.Event.JumpEvent(Kafkaf.Event.JumpEvent.Type.ResetCounter, contact.fixtureA.GetBody().userData) );
-        }
         else if( contact.fixtureA.userData == "head" )
         {
-            // Send damage event.
-            getWorld().sendEvent( new Kafkaf.Event.DamageEvent(contact.fixtureA.GetBody().userData, contact.fixtureB.GetBody().userData) );
+            if( contact.fixtureB.GetBody().GetLinearVelocity().get_y() > 1.0 )
+            {
+                // Send damage event.
+                getWorld().sendEvent( new Kafkaf.Event.DamageEvent(contact.fixtureA.GetBody().userData, contact.fixtureB.GetBody().userData) );
 
-            // Bounce effect.
-            var velocity = contact.fixtureB.GetBody().GetLinearVelocity().get_x();
-            var force = contact.fixtureB.GetBody().GetMass() * 5;
-            contact.fixtureB.GetBody().SetLinearVelocity(new b2Vec2(velocity, -force));
+                // Bounce effect.
+                var velocity = contact.fixtureB.GetBody().GetLinearVelocity().get_x();
+                var force = contact.fixtureB.GetBody().GetMass() * 5;
+                contact.fixtureB.GetBody().SetLinearVelocity(new b2Vec2(velocity, -force));
+            }
         }
     });
 

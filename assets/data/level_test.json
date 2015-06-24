@@ -3,13 +3,62 @@
     [
         {
             "prefab"    : "Ground",
-            "position"  : { "x" :  0, "y" : 2 },
-            "scale"     : { "x" : 30, "y" : 1 }
+            "position"  : { "x" :  0, "y" : 0 },
+            "scale"     : { "x" : 20, "y" : 1 }
         },
         {
             "prefab"    : "Ground",
-            "position"  : { "x" : 0, "y" : 0 },
-            "scale"     : { "x" : 0.1, "y" : 4 }
+            "position"  : { "x" : -10, "y" : -2.5 },
+            "scale"     : { "x" : 0.2, "y" : 10 }
+        },
+        {
+            "prefab"    : "Ground",
+            "position"  : { "x" : 10, "y" : -2.5 },
+            "scale"     : { "x" : 0.2, "y" : 10 }
+        },
+        {
+            "prefab"    : "Ground",
+            "position"  : { "x" : -5, "y" : -10 },
+            "scale"     : { "x" : 3, "y" : 0.5 }
+        },
+        {
+            "prefab"    : "Ground",
+            "position"  : { "x" : 5, "y" : -3 },
+            "scale"     : { "x" : 3, "y" : 0.5 }
+        },
+        {
+            "prefab"    : "Ground",
+            "position"  : { "x" : -3, "y" : -6 },
+            "scale"     : { "x" : 1.5, "y" : 0.5 }
+        },
+        {
+            "prefab"    : "Ground",
+            "position"  : { "x" : 7, "y" : -9.5 },
+            "scale"     : { "x" : 1.5, "y" : 0.5 }
+        },
+        {
+            "prefab"    : "Ground",
+            "position"  : { "x" : -9.17, "y" : -13.5 },
+            "scale"     : { "x" : 3, "y" : 0.2 },
+            "rotation"  : 60
+        },
+        {
+            "prefab"    : "Ground",
+            "position"  : { "x" : -7, "y" : -13.5 },
+            "scale"     : { "x" : 3, "y" : 0.2 },
+            "rotation"  : -60
+        },
+        {
+            "prefab"    : "Ground",
+            "position"  : { "x" : -9, "y" : -9.5 },
+            "scale"     : { "x" : 4, "y" : 0.2 },
+            "rotation"  : -20
+        },
+        {
+            "prefab"    : "Ground",
+            "position"  : { "x" : -13, "y" : -7.5 },
+            "scale"     : { "x" : 8, "y" : 0.2 },
+            "rotation"  : 20
         },
         {
             "name"      : "Player",
@@ -23,7 +72,39 @@
         },
         {
             "prefab"    : "Football",
-            "position"  : { "x" : 0, "y" : -5 }
+            "position"  : { "x" : -8, "y" : -14 }
+        },
+        {
+            "prefab"    : "Football",
+            "position"  : { "x" : -8, "y" : -15 }
+        },
+        {
+            "prefab"    : "Football",
+            "position"  : { "x" : -8, "y" : -16 }
+        },
+        {
+            "prefab"    : "Football",
+            "position"  : { "x" : -8, "y" : -17 }
+        },
+        {
+            "prefab"    : "Football",
+            "position"  : { "x" : -8, "y" : -18 }
+        },
+        {
+            "prefab"    : "Football",
+            "position"  : { "x" : -8, "y" : -19 }
+        },
+        {
+            "prefab"    : "Football",
+            "position"  : { "x" : -8, "y" : -20 }
+        },
+        {
+            "prefab"    : "Football",
+            "position"  : { "x" : -8, "y" : -21 }
+        },
+        {
+            "prefab"    : "Football",
+            "position"  : { "x" : -8, "y" : -22 }
         }
     ]
 }

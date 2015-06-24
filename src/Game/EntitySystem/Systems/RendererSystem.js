@@ -33,10 +33,11 @@ Kafkaf.RendererSystem = function( parentView )
     this.scene = new PIXI.Container();
 
     // Configure the scene.
-    this.scene.scale.x      = 55.0;
-    this.scene.scale.y      = 55.0;
+    this.scene.scale.x      = 45.0;
+    this.scene.scale.y      = 45.0;
     this.scene.position.x   = view.clientWidth  / 2.0;
     this.scene.position.y   = view.clientHeight / 2.0;
+    this.scene.position.y  += 300;
     view.appendChild(this.renderer.view);
 
     /**

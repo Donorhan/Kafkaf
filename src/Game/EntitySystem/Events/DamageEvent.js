@@ -1,9 +1,9 @@
 goog.provide('Kafkaf.Event.DamageEvent');
 
 /**
-* An event to indicate than an entity tool some damage.
+* An event to indicate when an entity took some damages.
 * @param {ES.Entity} victim The victim.
-* @param {ES.Entity} entity The agressor.
+* @param {ES.Entity} agressor The agressor.
 * @extends ES.Event
 * @constructor
 */

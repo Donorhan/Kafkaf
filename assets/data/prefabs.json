@@ -17,13 +17,13 @@
                 [
                     {
                         "friction"    : 0.9,
-                        "restitution" : 0.6,
+                        "restitution" : 0.10,
                         "density"     : 1.0,
                         "sensor"      : false,
                         "shape"       :
                         {
                             "type"    : "circle",
-                            "size"    : 1.0
+                            "size"    : 0.6
                         }
                     }
                 ]
@@ -82,7 +82,7 @@
                         "shape"       :
                         {
                             "type"    : "box",
-                            "size"    : { "x" : 1.0, "y" : 0.2 },                            
+                            "size"    : { "x" : 0.95, "y" : 0.2 },                            
                             "offset"  : { "x" : 0.0, "y" : -0.5 }
                         },
                         "filter"      :
@@ -120,7 +120,7 @@
                         "shape"       :
                         {
                             "type"    : "box",
-                            "size"    : { "x" : 1.0, "y" : 1.0 }
+                            "size"    : { "x" : 1.0, "y" : 0.5 }
                         },
                         "filter"      :
                         {

@@ -1,7 +1,6 @@
 goog.provide('Kafkaf.Loaders.PhysicBodyLoader');
 goog.require('Kafkaf.PhysicBodyComponent');
 goog.require('Kafkaf.TransformComponent');
-goog.require('goog.math');
 
 /**
 * Convert PhysicBodyComponent data to a PhysicBodyComponent.
@@ -109,7 +108,7 @@ Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data 
     }
 
     // Set position.
-    body.SetTransform( new b2Vec2(transformComponent.position.x, transformComponent.position.y), goog.math.toRadians(transformComponent.rotation) );
+    body.SetTransform( new b2Vec2(transformComponent.position.x, transformComponent.position.y), transformComponent.rotation * Math.PI / 180 );
 
     // Save Box2D instance.
     entity.addComponent( new Kafkaf.PhysicBodyComponent(body) );

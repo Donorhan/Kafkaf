@@ -4,6 +4,7 @@ goog.require('Kafkaf.PhysicSystem');
 goog.require('Kafkaf.RendererSystem');
 goog.require('Kafkaf.CollisionListenerSystem');
 goog.require('Kafkaf.ControllableSystem');
+goog.require('Kafkaf.LifeSystem');
 goog.require('Kafkaf.JumpSystem');
 goog.require('Kafkaf.MoveSystem');
 goog.require('Kafkaf.Event.UserEvent');
@@ -68,6 +69,7 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left,    81 );
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   68 );
                     player.addComponent( controllableComponent );
+                    player.addComponent( new Kafkaf.LifeComponent( 1 ) );
                     player.addComponent( new Kafkaf.MoveComponent() );
                     player.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
 
@@ -87,6 +89,7 @@ Kafkaf.GameScene.prototype.onActivation = function()
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left,    37 );
                     controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   39 );
                     player2.addComponent( controllableComponent );
+                    player2.addComponent( new Kafkaf.LifeComponent( 1 ) );
                     player2.addComponent( new Kafkaf.MoveComponent() );
                     player2.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
 
@@ -111,6 +114,7 @@ Kafkaf.GameScene.prototype.onLoad = function()
     this.world.addSystem( new Kafkaf.CollisionListenerSystem() );
     this.world.addSystem( new Kafkaf.ControllableSystem() );
     this.world.addSystem( new Kafkaf.GameSystem() );
+    this.world.addSystem( new Kafkaf.LifeSystem() );
     this.world.addSystem( new Kafkaf.JumpSystem() );
     this.world.addSystem( new Kafkaf.MoveSystem() );
 
