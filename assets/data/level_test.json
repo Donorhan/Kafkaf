@@ -61,16 +61,6 @@
             "rotation"  : 20
         },
         {
-            "name"      : "Player",
-            "prefab"    : "Character",
-            "position"  : { "x" : -2, "y" : -0.1 }
-        },
-        {
-            "name"      : "Player2",
-            "prefab"    : "Character",
-            "position"  : { "x" : 2, "y" : -0.1 }
-        },
-        {
             "prefab"    : "Football",
             "position"  : { "x" : -8, "y" : -14 }
         },

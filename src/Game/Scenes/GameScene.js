@@ -10,6 +10,7 @@ goog.require('Kafkaf.JumpSystem');
 goog.require('Kafkaf.MoveSystem');
 goog.require('Kafkaf.Event.UserEvent');
 goog.require('Kafkaf.Helpers.LevelLoader');
+goog.require('Kafkaf.Modes.GameMode');
 goog.require('Core.Event');
 goog.require('Core.Scene');
 
@@ -20,6 +21,8 @@ goog.require('Core.Scene');
 */
 Kafkaf.GameScene = function()
 {
+    Core.Scene.call(this);
+
     /**
     * The world instance: entities/components and systems management.
     * @type {ES.World}
@@ -49,56 +52,48 @@ goog.inherits(Kafkaf.GameScene, Core.Scene);
 */
 Kafkaf.GameScene.prototype.onActivation = function() 
 {
-    var loaderManager = this.levelLoader.getEntityBuilder();
+    this.startNewGame("level_test.json", Kafkaf.Modes.GameMode.Mode.TheOne, 1);
+};
 
+/**
+* Start a new game.
+* @param {string} levelName Name of the level to load.
+* @param {Kafkaf.Modes.GameMode.Mode} mode Mode.
+* @param {number} playerCount Player count.
+*/
+Kafkaf.GameScene.prototype.startNewGame = function( levelName, mode, playerCount ) 
+{
+    // Set mode.
+    var gameSystem = this.world.getSystem(Kafkaf.GameSystem);
+    gameSystem.setMode(Kafkaf.Modes.GameMode.Mode.TheOne);
+
+    // Load the level and ask to spawn players..
+    var _this = this;
+    this.loadLevel(levelName, function( success )
+    {
+        var playerSystem = _this.world.getSystem(Kafkaf.PlayerSystem);
+        for( var i = 0; i < playerCount; i++ )
+            playerSystem.createPlayer(_this.levelLoader.getEntityBuilder(), "player_" + i);
+    });
+}
+
+/**
+* Load a level from his name.
+* @param {string} levelName Name of the level to load.
+* @param {function} callback Function to execute when the level is ready.
+*/
+Kafkaf.GameScene.prototype.loadLevel = function( levelName, callback ) 
+{
     // Load catalog of objects.
     var _this = this;
-    loaderManager.loadPrefabsFromFile("./assets/data/prefabs.json?" + Math.random(), function( success )
+    this.levelLoader.getEntityBuilder().loadPrefabsFromFile("./assets/data/prefabs.json?" + Math.random(), function( success )
     {
         if( success )
         {
             // Load level.
-            _this.levelLoader.loadFromFile("./assets/data/level_test.json?" + Math.random(), function( success )
+            _this.levelLoader.loadFromFile("./assets/data/" + levelName + "?" + Math.random(), function( success )
             {
-                // Temp: Add a controllable component here.
-                var player = _this.world.getEntityWithName("Player");
-                if( player )
-                {
-                    var controllableComponent = new Kafkaf.ControllableComponent();
-                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Up,      90 );
-                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Down,    83 );
-                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left,    81 );
-                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   68 );
-                    player.addComponent( controllableComponent );
-                    player.addComponent( new Kafkaf.LifeComponent( 1 ) );
-                    player.addComponent( new Kafkaf.MoveComponent() );
-                    player.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
-
-                    var collisionListener = new Kafkaf.CollisionListenerComponent();
-                    collisionListener[0] = "characterBegin";
-                    collisionListener[1] = "characterEnd";
-                    player.addComponent(collisionListener);
-                }
-
-                // Temp: Add a controllable component here.
-                var player2 = _this.world.getEntityWithName("Player2");
-                if( player2 )
-                {
-                    var controllableComponent = new Kafkaf.ControllableComponent();
-                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Up,      38 );
-                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Down,    40 );
-                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left,    37 );
-                    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   39 );
-                    player2.addComponent( controllableComponent );
-                    player2.addComponent( new Kafkaf.LifeComponent( 1 ) );
-                    player2.addComponent( new Kafkaf.MoveComponent() );
-                    player2.addComponent( new Kafkaf.JumpComponent( 10, 2 ) );
-
-                    var collisionListener = new Kafkaf.CollisionListenerComponent();
-                    collisionListener[0] = "characterBegin";
-                    collisionListener[1] = "characterEnd";
-                    player2.addComponent(collisionListener);
-                }
+                callback();
             });
         }
     });
@@ -119,6 +114,7 @@ Kafkaf.GameScene.prototype.onLoad = function()
     this.world.addSystem( new Kafkaf.LifeSystem() );
     this.world.addSystem( new Kafkaf.JumpSystem() );
     this.world.addSystem( new Kafkaf.MoveSystem() );
+    this.world.addSystem( new Kafkaf.PlayerSystem() );
 
     // Links.
     this.rendererSystem             = this.world.getSystem(Kafkaf.RendererSystem);

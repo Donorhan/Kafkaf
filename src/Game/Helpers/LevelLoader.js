@@ -27,6 +27,13 @@ Kafkaf.Helpers.LevelLoader = function( world )
     * @private
     */
     this.entityBuilder = new Kafkaf.Helpers.EntityBuilder();
+
+    /**
+    * Indicate if a level is loaded.
+    * @type {boolean}
+    * @private
+    */
+    this.haveLevelLoaded = false;
 }
 
 /**
@@ -60,6 +67,10 @@ Kafkaf.Helpers.LevelLoader.prototype.getEntityBuilder = function()
 */
 Kafkaf.Helpers.LevelLoader.prototype.loadFromFile = function( filePath, callback )
 {
+    // Ensure the game can't do action when a level is loading.
+    this.haveLevelLoaded = false;
+
+    // Load file.
     var _this = this;
     loadJSON( filePath, function( JSONData )
     {
@@ -76,6 +87,10 @@ Kafkaf.Helpers.LevelLoader.prototype.loadFromFile = function( filePath, callback
 */
 Kafkaf.Helpers.LevelLoader.prototype.loadFromData = function( data )
 {
+    // Ensure world is empty.
+    this.world.removeEntities();
+    this.haveLevelLoaded = false;
+
     // Load entities.
     for( var i = 0; i < data.entities.length; i++ )
     {
@@ -110,5 +125,15 @@ Kafkaf.Helpers.LevelLoader.prototype.loadFromData = function( data )
         this.entityBuilder.buildEntityFromPrefab(entity, entityData.prefab);
     }
 
+    this.haveLevelLoaded = true;
     return true;
+};
+
+/**
+* Useful to know if a level is loaded.
+* @return {boolean} True if a level is in memory.
+*/
+Kafkaf.Helpers.LevelLoader.prototype.isLevelLoaded = function()
+{
+    return this.haveLevelLoaded;
 };
