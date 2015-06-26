@@ -93,7 +93,7 @@ Kafkaf.GameScene.prototype.loadLevel = function( levelName, callback )
             // Load level.
             _this.levelLoader.loadFromFile("./assets/data/" + levelName + "?" + Math.random(), function( success )
             {
-                callback();
+                callback(success);
             });
         }
     });

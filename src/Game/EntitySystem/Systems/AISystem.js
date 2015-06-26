@@ -24,12 +24,12 @@ Kafkaf.AISystem.prototype.update = function( deltaTime )
         var aiComponent = this.entities[i].getComponent(Kafkaf.AIComponent);
         for( var j = 0; j < aiComponent.behaviors.length; j++ )
         {
-	    	if( aiComponent.behaviors[j].type == Kafkaf.AIComponent.Type.AutomaticRotation )
-	    	{
-	        	var physicBodyComponent = this.entities[i].getComponent(Kafkaf.PhysicBodyComponent);
-	        	if( physicBodyComponent )
-	        		physicBodyComponent.setAngularVelocity(aiComponent.behaviors[j].value);
-	    	}
+            if( aiComponent.behaviors[j].type == Kafkaf.AIComponent.Type.AutomaticRotation )
+            {
+                var physicBodyComponent = this.entities[i].getComponent(Kafkaf.PhysicBodyComponent);
+                if( physicBodyComponent )
+                    physicBodyComponent.setAngularVelocity(aiComponent.behaviors[j].value);
+            }
         }
     }
 };

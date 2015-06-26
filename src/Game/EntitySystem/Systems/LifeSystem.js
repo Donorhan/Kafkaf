@@ -26,6 +26,6 @@ Kafkaf.LifeSystem.prototype.onEvent = function( event )
         lifeComponent.amount -= 1; // ToDo: Take in account other entity's attributs (ex: weapon's type, weight, …).
 
         if( lifeComponent.amount <= 0 )
-            this.world.sendEvent( new Kafkaf.Event.DeadEvent(event.victim) );
+            this.world.sendEvent( new Kafkaf.Event.DeadEvent(event.victim, event.agressor) );
     }
 };

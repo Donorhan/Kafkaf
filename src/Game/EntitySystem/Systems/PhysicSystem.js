@@ -18,7 +18,7 @@ Kafkaf.PhysicSystem = function()
     * The physic world.
     * @type {b2World}
     */
-    this.physicWorld = new b2World( new b2Vec2(0.0, 25.0) );
+    this.physicWorld = null;
 
     /**
     * Queue with bodies to remove.
@@ -33,6 +33,43 @@ Kafkaf.PhysicSystem = function()
     this.debugGraphicObject = null;
 }
 ES.Utils.extend(ES.System, Kafkaf.PhysicSystem);
+
+/**
+* Call when system is activated.
+*/
+Kafkaf.PhysicSystem.prototype.onActivation = function()
+{
+    if( this.physicWorld )
+        Box2D.destroy(this.physicWorld);
+
+    this.physicWorld = new b2World( new b2Vec2(0.0, 25.0) );
+};
+
+/**
+* Call when system is inactivated.
+*/
+Kafkaf.PhysicSystem.prototype.onInactivation = function() 
+{
+    Box2D.destroy(this.physicWorld);
+    this.physicWorld = null;
+};
+
+/**
+* Call when the system is clear.
+*/
+Kafkaf.PhysicSystem.prototype.onClear = function() 
+{
+    // Destroy each physic body.
+    for( var i = 0; i < this.entities.length; i++ )
+    {
+        var physicBodyComponent = this.entities[i].getComponent(Kafkaf.PhysicBodyComponent);
+        this.physicWorld.DestroyBody(physicBodyComponent.instance);
+    }
+
+    // Clear other data.
+    this.bodiesToRemove = [];
+    this.entities       = [];
+};
 
 /**
 * System's entry point.

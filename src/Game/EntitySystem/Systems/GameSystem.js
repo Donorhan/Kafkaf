@@ -5,6 +5,7 @@ goog.require('Kafkaf.Modes.TheCollectorMode');
 goog.require('Kafkaf.Modes.TheSurvivorMode');
 goog.require('Kafkaf.Modes.TheOneMode');
 goog.require('Kafkaf.Modes.RaceMode');
+goog.require('Kafkaf.Event.GameEvent');
 
 /**
 * Game system: Manage game's logic.
@@ -75,6 +76,12 @@ Kafkaf.GameSystem.prototype.update = function( deltaTime )
 */
 Kafkaf.GameSystem.prototype.onEvent = function( event ) 
 {
-    if( this.mode )
+    if( event instanceof Kafkaf.Event.GameEvent )
+    {
+        // Temp.
+        var scene = Core.Application.getInstance().getGame().getSceneManager().getActiveScene();
+        scene.startNewGame("level_test.json", Kafkaf.Modes.GameMode.Mode.TheOne, 1);
+    }
+    else if( this.mode )
     	this.mode.onEvent(event);
 };
