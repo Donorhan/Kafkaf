@@ -1,4 +1,4 @@
-goog.provide('Kafkaf.Helpers.LevelLoader');
+goog.provide('Kafkaf.Models.Level');
 goog.require('Kafkaf.Helpers.EntityBuilder');
 goog.require('Kafkaf.Loaders.AILoader');
 goog.require('Kafkaf.Loaders.CollisionListenerLoader');
@@ -12,7 +12,7 @@ goog.require('Kafkaf.TransformComponent');
 * @constructor
 * @interface
 */
-Kafkaf.Helpers.LevelLoader = function( world )
+Kafkaf.Models.Level = function( world )
 {
     /**
     * The world instance: entities/components and systems management.
@@ -29,18 +29,18 @@ Kafkaf.Helpers.LevelLoader = function( world )
     this.entityBuilder = new Kafkaf.Helpers.EntityBuilder();
 
     /**
-    * Indicate if a level is loaded.
+    * Indicate if a level is ready to be played.
     * @type {boolean}
     * @private
     */
-    this.haveLevelLoaded = false;
+    this.ready = false;
 }
 
 /**
 * Init.
 * @return {boolean} True if everything is ok.
 */
-Kafkaf.Helpers.LevelLoader.prototype.init = function()
+Kafkaf.Models.Level.prototype.init = function()
 {
     this.entityBuilder.registerLoader("AIComponent", new Kafkaf.Loaders.AILoader(this.world.getSystem(Kafkaf.AISystem)) );
     this.entityBuilder.registerLoader("CollisionListenerComponent", new Kafkaf.Loaders.CollisionListenerLoader(this.world.getSystem(Kafkaf.PhysicSystem)) );
@@ -54,7 +54,7 @@ Kafkaf.Helpers.LevelLoader.prototype.init = function()
 * Get a reference to the EntityBuilder.
 * @return {Kafkaf.Helpers.EntityBuilder} A EntityBuilder instance.
 */
-Kafkaf.Helpers.LevelLoader.prototype.getEntityBuilder = function()
+Kafkaf.Models.Level.prototype.getEntityBuilder = function()
 {
     return this.entityBuilder;
 };
@@ -65,10 +65,10 @@ Kafkaf.Helpers.LevelLoader.prototype.getEntityBuilder = function()
 * @param callback Callback.
 * @return True if everything is ok.
 */
-Kafkaf.Helpers.LevelLoader.prototype.loadFromFile = function( filePath, callback )
+Kafkaf.Models.Level.prototype.loadFromFile = function( filePath, callback )
 {
     // Ensure the game can't do action when a level is loading.
-    this.haveLevelLoaded = false;
+    this.ready = false;
 
     // Load file.
     var _this = this;
@@ -85,11 +85,11 @@ Kafkaf.Helpers.LevelLoader.prototype.loadFromFile = function( filePath, callback
 * @param {string} data Level's data (JSON format).
 * @return {boolean} True if everything is ok.
 */
-Kafkaf.Helpers.LevelLoader.prototype.loadFromData = function( data )
+Kafkaf.Models.Level.prototype.loadFromData = function( data )
 {
     // Ensure world is empty.
     this.world.removeEntities();
-    this.haveLevelLoaded = false;
+    this.ready          = false;
 
     // Load entities.
     for( var i = 0; i < data.entities.length; i++ )
@@ -125,15 +125,15 @@ Kafkaf.Helpers.LevelLoader.prototype.loadFromData = function( data )
         this.entityBuilder.buildEntityFromPrefab(entity, entityData.prefab);
     }
 
-    this.haveLevelLoaded = true;
+    this.ready = true;
     return true;
 };
 
 /**
-* Useful to know if a level is loaded.
-* @return {boolean} True if a level is in memory.
+* Useful to know if the level is loaded.
+* @return {boolean} True if the level is in memory.
 */
-Kafkaf.Helpers.LevelLoader.prototype.isLevelLoaded = function()
+Kafkaf.Models.Level.prototype.isLoaded = function()
 {
-    return this.haveLevelLoaded;
+    return this.ready;
 };

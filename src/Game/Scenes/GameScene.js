@@ -9,7 +9,7 @@ goog.require('Kafkaf.LifeSystem');
 goog.require('Kafkaf.JumpSystem');
 goog.require('Kafkaf.MoveSystem');
 goog.require('Kafkaf.Event.UserEvent');
-goog.require('Kafkaf.Helpers.LevelLoader');
+goog.require('Kafkaf.Models.Level');
 goog.require('Kafkaf.Modes.GameMode');
 goog.require('Core.Event');
 goog.require('Core.Scene');
@@ -31,11 +31,11 @@ Kafkaf.GameScene = function()
     this.world = new ES.World();
 
     /**
-    * Load levels and manage prefabs.
-    * @type {Kafkaf.Helpers.LevelLoader}
+    * Level instance.
+    * @type {Kafkaf.Models.Level}
     * @private
     */
-    this.levelLoader = new Kafkaf.Helpers.LevelLoader(this.world);
+    this.level = new Kafkaf.Models.Level(this.world);
 
     /**
     * A reference to the renderer system.
@@ -67,13 +67,13 @@ Kafkaf.GameScene.prototype.startNewGame = function( levelName, mode, playerCount
     var gameSystem = this.world.getSystem(Kafkaf.GameSystem);
     gameSystem.setMode(Kafkaf.Modes.GameMode.Mode.TheOne);
 
-    // Load the level and ask to spawn players..
+    // Load the level and ask to spawn players.
     var _this = this;
     this.loadLevel(levelName, function( success )
     {
         var playerSystem = _this.world.getSystem(Kafkaf.PlayerSystem);
         for( var i = 0; i < playerCount; i++ )
-            playerSystem.createPlayer(_this.levelLoader.getEntityBuilder(), "player_" + i);
+            playerSystem.createPlayer(_this.level.getEntityBuilder(), "player_" + i);
     });
 }
 
@@ -86,12 +86,12 @@ Kafkaf.GameScene.prototype.loadLevel = function( levelName, callback )
 {
     // Load catalog of objects.
     var _this = this;
-    this.levelLoader.getEntityBuilder().loadPrefabsFromFile("./assets/data/prefabs.json?" + Math.random(), function( success )
+    this.level.getEntityBuilder().loadPrefabsFromFile("./assets/data/prefabs.json?" + Math.random(), function( success )
     {
         if( success )
         {
             // Load level.
-            _this.levelLoader.loadFromFile("./assets/data/" + levelName + "?" + Math.random(), function( success )
+            _this.level.loadFromFile("./assets/data/" + levelName + "?" + Math.random(), function( success )
             {
                 callback(success);
             });
@@ -126,7 +126,7 @@ Kafkaf.GameScene.prototype.onLoad = function()
     addCollisionSolvers(collisionListenerSystem);
 
     // Init.
-    this.levelLoader.init();
+    this.level.init();
 
     // Debug physic.
     {
