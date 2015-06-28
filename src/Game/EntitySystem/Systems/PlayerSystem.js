@@ -31,8 +31,9 @@ Kafkaf.PlayerSystem.prototype.onClear = function()
 * Create a new player.
 * @param {Kafkaf.Helpers.EntityBuilder} builder The entity builder.
 * @param {string} name Name to assign.
+* @param {Array.<number, number>} position Spawn position.
 */
-Kafkaf.PlayerSystem.prototype.createPlayer = function( builder, name ) 
+Kafkaf.PlayerSystem.prototype.createPlayer = function( builder, name, position ) 
 {
     var player = this.world.createEntity();
 
@@ -40,8 +41,8 @@ Kafkaf.PlayerSystem.prototype.createPlayer = function( builder, name )
 
     // Add the most important component.
     var transformable           = new Kafkaf.TransformComponent();
-    transformable.position.x    = -2 + (this.players.length * 2);
-    transformable.position.y    = -2;
+    transformable.position.x    = position[0];
+    transformable.position.y    = position[1];
     player.addComponent(transformable);
 
     // Add character components.

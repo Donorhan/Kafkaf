@@ -1,6 +1,7 @@
 goog.provide('Kafkaf.GameScene');
 goog.require('Kafkaf.AISystem');
 goog.require('Kafkaf.GameSystem');
+goog.require('Kafkaf.PlayerSystem');
 goog.require('Kafkaf.PhysicSystem');
 goog.require('Kafkaf.RendererSystem');
 goog.require('Kafkaf.CollisionListenerSystem');
@@ -9,7 +10,6 @@ goog.require('Kafkaf.LifeSystem');
 goog.require('Kafkaf.JumpSystem');
 goog.require('Kafkaf.MoveSystem');
 goog.require('Kafkaf.Event.UserEvent');
-goog.require('Kafkaf.Models.Level');
 goog.require('Kafkaf.Modes.GameMode');
 goog.require('Core.Event');
 goog.require('Core.Scene');
@@ -31,13 +31,6 @@ Kafkaf.GameScene = function()
     this.world = new ES.World();
 
     /**
-    * Level instance.
-    * @type {Kafkaf.Models.Level}
-    * @private
-    */
-    this.level = new Kafkaf.Models.Level(this.world);
-
-    /**
     * A reference to the renderer system.
     * Useful to process graphic's part out of the logic one.
     * @type {Kafkaf.RendererSystem}
@@ -52,51 +45,9 @@ goog.inherits(Kafkaf.GameScene, Core.Scene);
 */
 Kafkaf.GameScene.prototype.onActivation = function() 
 {
-    this.startNewGame("level_test.json", Kafkaf.Modes.GameMode.Mode.TheOne, 1);
-};
-
-/**
-* Start a new game.
-* @param {string} levelName Name of the level to load.
-* @param {Kafkaf.Modes.GameMode.Mode} mode Mode.
-* @param {number} playerCount Player count.
-*/
-Kafkaf.GameScene.prototype.startNewGame = function( levelName, mode, playerCount ) 
-{
-    // Set mode.
     var gameSystem = this.world.getSystem(Kafkaf.GameSystem);
-    gameSystem.setMode(Kafkaf.Modes.GameMode.Mode.TheOne);
-
-    // Load the level and ask to spawn players.
-    var _this = this;
-    this.loadLevel(levelName, function( success )
-    {
-        var playerSystem = _this.world.getSystem(Kafkaf.PlayerSystem);
-        for( var i = 0; i < playerCount; i++ )
-            playerSystem.createPlayer(_this.level.getEntityBuilder(), "player_" + i);
-    });
-}
-
-/**
-* Load a level from his name.
-* @param {string} levelName Name of the level to load.
-* @param {function} callback Function to execute when the level is ready.
-*/
-Kafkaf.GameScene.prototype.loadLevel = function( levelName, callback ) 
-{
-    // Load catalog of objects.
-    var _this = this;
-    this.level.getEntityBuilder().loadPrefabsFromFile("./assets/data/prefabs.json?" + Math.random(), function( success )
-    {
-        if( success )
-        {
-            // Load level.
-            _this.level.loadFromFile("./assets/data/" + levelName + "?" + Math.random(), function( success )
-            {
-                callback(success);
-            });
-        }
-    });
+    if( gameSystem )
+        gameSystem.startNewGame("level_test.json", Kafkaf.Modes.GameMode.Mode.TheOne, 2);
 };
 
 /**
@@ -124,9 +75,6 @@ Kafkaf.GameScene.prototype.onLoad = function()
 
     // Link collision solvers to the right system.
     addCollisionSolvers(collisionListenerSystem);
-
-    // Init.
-    this.level.init();
 
     // Debug physic.
     {

@@ -29,6 +29,13 @@ Kafkaf.Models.Level = function( world )
     this.entityBuilder = new Kafkaf.Helpers.EntityBuilder();
 
     /**
+    * An array with all the spawn points avalaibles.
+    * @type {Array.<Array.<number, number>>}
+    * @private
+    */
+    this.spawnPoints = [];
+
+    /**
     * Indicate if a level is ready to be played.
     * @type {boolean}
     * @private
@@ -89,7 +96,12 @@ Kafkaf.Models.Level.prototype.loadFromData = function( data )
 {
     // Ensure world is empty.
     this.world.removeEntities();
+    this.spawnPoints    = [];
     this.ready          = false;
+
+    // Load spawn points.
+    for( var i = 0; i < data.spawns.length; i++ )
+        this.spawnPoints[i] = [data.spawns[i].x, data.spawns[i].y];        
 
     // Load entities.
     for( var i = 0; i < data.entities.length; i++ )
@@ -136,4 +148,13 @@ Kafkaf.Models.Level.prototype.loadFromData = function( data )
 Kafkaf.Models.Level.prototype.isLoaded = function()
 {
     return this.ready;
+};
+
+/**
+* Get spawn points.
+* @return {Array.<Array.<number, number>>} Array of spawn points.
+*/
+Kafkaf.Models.Level.prototype.getSpawnPoints = function()
+{
+    return this.spawnPoints;
 };

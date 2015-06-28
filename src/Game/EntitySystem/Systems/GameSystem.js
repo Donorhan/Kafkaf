@@ -6,6 +6,8 @@ goog.require('Kafkaf.Modes.TheSurvivorMode');
 goog.require('Kafkaf.Modes.TheOneMode');
 goog.require('Kafkaf.Modes.RaceMode');
 goog.require('Kafkaf.Event.GameEvent');
+goog.require('Kafkaf.Models.Level');
+goog.require('Kafkaf.PlayerSystem');
 
 /**
 * Game system: Manage game's logic.
@@ -23,8 +25,70 @@ Kafkaf.GameSystem = function()
     */
     this.mode = null;
 
+    /**
+    * Level instance.
+    * @type {Kafkaf.Models.Level}
+    * @private
+    */
+    this.level = null;
+
 }
 ES.Utils.extend(ES.System, Kafkaf.GameSystem);
+
+/**
+* Call when system is activated.
+*/
+Kafkaf.GameSystem.prototype.onActivation = function()
+{
+    this.level = new Kafkaf.Models.Level(this.world);    
+};
+
+/**
+* Start a new game.
+* @param {string} levelName Name of the level to load.
+* @param {Kafkaf.Modes.GameMode.Mode} mode Mode.
+* @param {number} playerCount Player count.
+*/
+Kafkaf.GameSystem.prototype.startNewGame = function( levelName, mode, playerCount ) 
+{
+    // Set mode.
+    this.setMode(Kafkaf.Modes.GameMode.Mode.TheOne);
+
+    // Load the level and ask to spawn players.
+    var _this = this;
+    this.loadLevel(levelName, function( success )
+    {
+        var spawnPoints     = _this.level.getSpawnPoints();
+        var playerSystem    = _this.world.getSystem(Kafkaf.PlayerSystem);
+        for( var i = 0; i < playerCount; i++ )
+            playerSystem.createPlayer( _this.level.getEntityBuilder(), "player_" + i, spawnPoints[i] );
+    });
+}
+
+/**
+* Load a level from his name.
+* @param {string} levelName Name of the level to load.
+* @param {function} callback Function to execute when the level is ready.
+*/
+Kafkaf.GameSystem.prototype.loadLevel = function( levelName, callback ) 
+{
+    // Init.
+    this.level.init();
+
+    // Load catalog of objects.
+    var _this = this;
+    this.level.getEntityBuilder().loadPrefabsFromFile("./assets/data/prefabs.json?" + Math.random(), function( success )
+    {
+        if( success )
+        {
+            // Load level.
+            _this.level.loadFromFile("./assets/data/" + levelName + "?" + Math.random(), function( success )
+            {
+                callback(success);
+            });
+        }
+    });
+};
 
 /**
 * System's entry point.
@@ -77,11 +141,7 @@ Kafkaf.GameSystem.prototype.update = function( deltaTime )
 Kafkaf.GameSystem.prototype.onEvent = function( event ) 
 {
     if( event instanceof Kafkaf.Event.GameEvent )
-    {
-        // Temp.
-        var scene = Core.Application.getInstance().getGame().getSceneManager().getActiveScene();
-        scene.startNewGame("level_test.json", Kafkaf.Modes.GameMode.Mode.TheOne, 1);
-    }
+        this.startNewGame("level_test.json", Kafkaf.Modes.GameMode.Mode.TheOne, 2);
     else if( this.mode )
     	this.mode.onEvent(event);
 };
