@@ -1,5 +1,6 @@
 goog.provide('Kafkaf.Game');
 goog.require('Kafkaf.GameScene');
+goog.require('Kafkaf.Models.Configuration');
 goog.require('Core.Game');
 
 /**
@@ -18,8 +19,15 @@ goog.inherits(Kafkaf.Game, Core.Game);
 */
 Kafkaf.Game.prototype.init = function()
 {
-    // Push default scene.
-    this.sceneManager.pushScene( new Kafkaf.GameScene() );
+	var _this = this;
+
+	// First we load user's configuration.
+    var configuration = Kafkaf.Models.Configuration.getInstance();
+    configuration.loadFromFile( "./assets/data/config.json", function(success )
+    {
+    	// Push default scene.
+   		_this.sceneManager.pushScene( new Kafkaf.GameScene() );    	
+    });
 
     return true;
 };

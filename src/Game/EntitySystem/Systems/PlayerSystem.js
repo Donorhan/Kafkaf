@@ -1,5 +1,6 @@
 goog.provide('Kafkaf.PlayerSystem');
 goog.require('Kafkaf.Helpers.EntityBuilder');
+goog.require('Kafkaf.Models.Configuration');
 
 /**
 * Manage players.
@@ -49,11 +50,12 @@ Kafkaf.PlayerSystem.prototype.createPlayer = function( builder, name, position )
     builder.buildEntityFromPrefab(player, "Character");
 
     // Controls (ToDo: use configuration file).
-    var controllableComponent = new Kafkaf.ControllableComponent();
-    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Up,      90 );
-    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Down,    83 );
-    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left,    81 );
-    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right,   68 );
+    var controllerData          = Kafkaf.Models.Configuration.getInstance().getController(this.players.length);
+    var controllableComponent   = new Kafkaf.ControllableComponent();
+    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Up, controllerData["jump"] );
+    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Down, controllerData["action"] );
+    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Left, controllerData["left"] );
+    controllableComponent.setKey( Kafkaf.ControllableComponent.ControlType.Right, controllerData["right"] );
     player.addComponent( controllableComponent );
 
     // Default components.

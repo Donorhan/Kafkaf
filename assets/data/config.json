@@ -1,0 +1,42 @@
+{
+    "game":
+    {
+        "showName"      : false
+    },
+    "graphics":
+    {
+        "quality"       : "high",
+        "msaa"          : true
+    },
+    "controls":
+    [
+        {
+            "type"      : "keyboard",
+            "left"      : 81,
+            "right"     : 68,
+            "jump"      : 90,
+            "action"    : 83
+        },
+        {
+            "type"      : "keyboard",
+            "left"      : 37,
+            "right"     : 39,
+            "jump"      : 38,
+            "action"    : 40
+        },
+        {
+            "type"      : "keyboard",
+            "left"      : 74,
+            "right"     : 76,
+            "jump"      : 73,
+            "action"    : 75
+        },
+        {
+            "type"      : "keyboard",
+            "left"      : 100,
+            "right"     : 102,
+            "jump"      : 104,
+            "action"    : 101
+        }
+    ]
+}
