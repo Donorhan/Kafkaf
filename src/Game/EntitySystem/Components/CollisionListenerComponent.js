@@ -1,10 +1,12 @@
 goog.provide('Kafkaf.CollisionListenerComponent');
 goog.provide('Kafkaf.CollisionData');
+goog.require('ES.Utils');
 
 /**
 * Allow entities to listen physic collisions and get some informations about them.
 * @extends {ES.Component}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.CollisionListenerComponent = function()
 {
@@ -12,10 +14,9 @@ Kafkaf.CollisionListenerComponent = function()
 
     /**
     * Callbacks names.
-    * @type {Array.<string>}
+    * @type {Array.<function(Kafkaf.CollisionData)>}
     */
     this.callbacks = [];
-
 }
 ES.Utils.extend(ES.Component, Kafkaf.CollisionListenerComponent);
 
@@ -45,13 +46,13 @@ Kafkaf.CollisionData = function()
 
     /**
     * Body's fixture in contact from the entity A.
-    * @type {Object}
+    * @type {b2Fixture}
     */
     this.fixtureA = null;
 
     /**
     * Body's fixture in contact from the entity B.
-    * @type {Object}
+    * @type {b2Fixture}
     */
     this.fixtureB = null;
 

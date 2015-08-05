@@ -1,3 +1,6 @@
 [submodule "libs/closure-library"]
 	path = libs/closure-library
 	url = https://github.com/google/closure-library
+[submodule "libs/JS-EntitySystem"]
+	path = libs/JS-EntitySystem
+	url = https://github.com/DonoSybrix/JS-EntitySystem

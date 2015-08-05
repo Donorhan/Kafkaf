@@ -1,4 +1,6 @@
+goog.provide('Kafkaf.Main');
 goog.require('Core.Application');
+goog.require('Kafkaf.Game');
 
 window.onload = function() 
 {

@@ -1,4 +1,6 @@
 goog.provide('Kafkaf.Event.DeadEvent');
+goog.require('ES.Event');
+goog.require('ES.Utils');
 
 /**
 * An event to indicate when an entity died.
@@ -6,6 +8,7 @@ goog.provide('Kafkaf.Event.DeadEvent');
 * @param {ES.Entity} killer The killer.
 * @extends ES.Event
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.Event.DeadEvent = function( victim, killer )
 {
@@ -20,6 +23,5 @@ Kafkaf.Event.DeadEvent = function( victim, killer )
     * @type {ES.Entity}
     */
     this.killer = killer;
-
 }
 ES.Utils.extend(ES.Event, Kafkaf.Event.DeadEvent);

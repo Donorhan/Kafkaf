@@ -1,11 +1,13 @@
 goog.provide('Kafkaf.JumpComponent');
+goog.require('ES.Utils');
 
 /**
 * Allow an entity to jump.
-* @param {=number} force Jump's force to apply.
-* @param {=number} max Jump max allowed in the air.
+* @param {number=} force Jump's force to apply.
+* @param {number=} max Jump max allowed in the air.
 * @extends {ES.Component}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.JumpComponent = function( force, max )
 {
@@ -41,6 +43,5 @@ Kafkaf.JumpComponent = function( force, max )
     * @type {number}
     */
     this.timeBetweenJump = 250;
-
 }
 ES.Utils.extend(ES.Component, Kafkaf.JumpComponent);

@@ -3,11 +3,13 @@ goog.require('Kafkaf.ControllableComponent');
 goog.require('Kafkaf.Event.UserEvent');
 goog.require('Kafkaf.Event.JumpEvent');
 goog.require('Kafkaf.Event.MoveEvent');
+goog.require('ES.Utils');
 
 /**
 * Game system: Manage game's logic.
 * @extends {ES.System}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.ControllableSystem = function()
 {
@@ -29,8 +31,8 @@ Kafkaf.ControllableSystem.prototype.onEvent = function( event )
 };
 
 /**
-* Process event and convert it to a game event.
-* @param {ES.Event} event An ES.Event instance.
+* Process events and convert them to game events.
+* @param {Core.Event} event An Core.Event instance.
 * @param {ES.Entity} entity An ES.Entity instance.
 */
 Kafkaf.ControllableSystem.prototype.processEvent = function( event, entity ) 

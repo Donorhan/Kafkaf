@@ -1,4 +1,5 @@
 goog.provide('Kafkaf.Helpers.EntityBuilder');
+goog.require('Utils');
 
 /**
 * Build entities.
@@ -8,13 +9,13 @@ Kafkaf.Helpers.EntityBuilder = function()
 {
     /**
     * Array of Loader.
-    * @type {Array.<string, Object>}
+    * @type {Array.<Object>}
     */
     this.loaders = [];
 
     /**
     * Array of string.
-    * @type {Array.<string, Array.<string, string>>}
+    * @type {Array.<Array.<string>>}
     */
     this.prefabs = [];
 }
@@ -32,13 +33,13 @@ Kafkaf.Helpers.EntityBuilder.prototype.registerLoader = function( name, instance
 /**
 * Load prebafs from a file.
 * @param {string} filePath Path to file with entities's data.
-* @param {function} callback Callback.
+* @param {function(boolean)} callback Callback.
 * @return {boolean} True if everything is ok.
 */
 Kafkaf.Helpers.EntityBuilder.prototype.loadPrefabsFromFile = function( filePath, callback )
 {
 	var _this = this;
-    loadJSON( filePath, function( JSONData )
+    Utils.loadJSON( filePath, function( JSONData )
     {
         callback( _this.loadPrefabsFromData(JSONData) );
     })
@@ -48,7 +49,7 @@ Kafkaf.Helpers.EntityBuilder.prototype.loadPrefabsFromFile = function( filePath,
 
 /**
 * Load prefabs from JSON data.
-* @param {string} data Level's data (JSON format).
+* @param {Object} data Level's data (JSON format).
 * @return {boolean} True if everything is ok.
 */
 Kafkaf.Helpers.EntityBuilder.prototype.loadPrefabsFromData = function( data )
@@ -58,11 +59,11 @@ Kafkaf.Helpers.EntityBuilder.prototype.loadPrefabsFromData = function( data )
     {
     	var keys = Object.keys(prefabs[i]);
 
-    	var data = [];
+    	var prefabData = [];
     	for( var j = 0; j < keys.length; j++ )
-    		data[keys[j]] = prefabs[i][keys[j]];
+    		prefabData[keys[j]] = prefabs[i][keys[j]];
 
-		this.prefabs[prefabs[i].main.name] = data;
+		this.prefabs[prefabs[i].main.name] = prefabData;
     }
 
     return true;
@@ -76,7 +77,6 @@ Kafkaf.Helpers.EntityBuilder.prototype.loadPrefabsFromData = function( data )
 */
 Kafkaf.Helpers.EntityBuilder.prototype.buildEntityFromPrefab = function( entity, prefabName )
 {
-    // Search builder.
     var source = this.prefabs[prefabName];
     if( !source )
         return false;

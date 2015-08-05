@@ -4,6 +4,7 @@ goog.require('Core.Application');
 /**
 * Convert DOM events to game events.
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Core.Event = function()
 {
@@ -40,7 +41,7 @@ Core.Event.Type = { MouseDown: 0, MouseUp: 1, MouseMove: 2, KeyDown: 3, KeyUp: 4
 
 /**
 * Mouse events
-* @param {HTMLElement} event Event's data.
+* @param {Event} event Event's data.
 */
 document.onmousemove = function( event ) 
 {
@@ -55,7 +56,7 @@ document.onmousemove = function( event )
 
 /**
 * Mouse events: Click down event.
-* @param {HTMLElement} event Event's data.
+* @param {Event} event Event's data.
 */
 document.onmousedown = function( event ) 
 {
@@ -70,7 +71,7 @@ document.onmousedown = function( event )
 
 /**
 * Mouse events: Click up event.
-* @param {HTMLElement} event Event's data.
+* @param {Event} event Event's data.
 */
 document.onmouseup = function( event ) 
 {
@@ -85,7 +86,7 @@ document.onmouseup = function( event )
 
 /**
 * Keyboard events: Key down.
-* @param {HTMLElement} event Event's data.
+* @param {Event} event Event's data.
 */
 document.onkeydown = function( event ) 
 {
@@ -99,7 +100,7 @@ document.onkeydown = function( event )
 
 /**
 * Keyboard events: Key up.
-* @param {HTMLElement} event Event's data.
+* @param {Event} event Event's data.
 */
 document.onkeyup = function( event ) 
 {
@@ -113,7 +114,7 @@ document.onkeyup = function( event )
 
 /**
 * Window events: Resize.
-* @param {HTMLElement} event Event's data.
+* @param {Event} event Event's data.
 */
 window.onresize = function( event ) 
 {

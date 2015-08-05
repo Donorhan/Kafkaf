@@ -4,6 +4,7 @@ goog.require('Core.Scene');
 /**
 * Manage Scene instances.
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Core.SceneManager = function()
 {
@@ -15,13 +16,13 @@ Core.SceneManager = function()
 
     /**
     * Active scene, can be null.
-    * @type {Core.Scene|null}
+    * @type {Core.Scene}
     */
     this.activeScene = null;
 
     /**
     * Scene waiting to be pushed.
-    * @type {Core.Scene|null}
+    * @type {Core.Scene}
     */
     this.waitingScene = null;
 
@@ -70,8 +71,8 @@ Core.SceneManager.prototype.update = function( deltaTime )
                     this.activeScene.onInactivation();
 
                 // Save and activate new one.
-                this.scenes[this.scenes.length] = this.waitingScene;
-                this.activeScene                = this.waitingScene;
+                this.scenes.push(this.waitingScene);
+                this.activeScene = this.waitingScene;
                 this.activeScene.onLoad();
                 this.activeScene.onActivation();
 

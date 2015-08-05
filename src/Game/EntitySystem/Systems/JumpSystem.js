@@ -1,11 +1,13 @@
 goog.provide('Kafkaf.JumpSystem');
 goog.require('Kafkaf.JumpComponent');
 goog.require('Kafkaf.Event.JumpEvent');
+goog.require('ES.Utils');
 
 /**
 * Manage entities's jumps.
 * @extends {ES.System}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.JumpSystem = function()
 {

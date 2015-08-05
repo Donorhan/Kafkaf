@@ -4,6 +4,7 @@ goog.provide('Kafkaf.Debug');
 * Create a debug object for Box2D.
 * @param {PIXI.Graphics} graphics A PIXI.Graphics instance.
 * @return {Box2D.JSDraw} An object for Box2D.
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.Debug.getPIXIDebugDraw = function( graphics )
 {

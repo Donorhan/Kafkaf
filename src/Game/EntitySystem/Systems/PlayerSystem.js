@@ -1,11 +1,13 @@
 goog.provide('Kafkaf.PlayerSystem');
 goog.require('Kafkaf.Helpers.EntityBuilder');
 goog.require('Kafkaf.Models.Configuration');
+goog.require('ES.Utils');
 
 /**
 * Manage players.
 * @extends {ES.System}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.PlayerSystem = function()
 {
@@ -25,7 +27,7 @@ ES.Utils.extend(ES.System, Kafkaf.PlayerSystem);
 */
 Kafkaf.PlayerSystem.prototype.onClear = function() 
 {
-    this.players = [];
+    this.players.length = 0;
 };
 
 /**
@@ -67,7 +69,7 @@ Kafkaf.PlayerSystem.prototype.createPlayer = function( builder, name, position )
     collisionListener[1] = "characterEnd";
     player.addComponent(collisionListener);
 
-    this.players[this.players.length] = player;
+    this.players.push(player);
 };
 
 /**

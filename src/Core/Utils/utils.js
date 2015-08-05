@@ -1,3 +1,5 @@
+goog.provide('Utils');
+
 /**
 * Prepare "requestAnimFrame" function.
 */
@@ -13,10 +15,10 @@ window.requestAnimFrame = (function()
 
 /**
 * Load a JSON file.
-* @param filePath Path to the file.
-* @param callback Callback.
+* @param {string} filePath Path to the file.
+* @param {function(Object)} callback Callback.
 */
-function loadJSON( filePath, callback )
+Utils.loadJSON = function( filePath, callback )
 {
 	var xobj = new XMLHttpRequest();
 	xobj.overrideMimeType("application/json");

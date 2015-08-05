@@ -2,11 +2,13 @@ goog.provide('Kafkaf.LifeSystem');
 goog.require('Kafkaf.LifeComponent');
 goog.require('Kafkaf.Event.DamageEvent');
 goog.require('Kafkaf.Event.DeadEvent');
+goog.require('ES.Utils');
 
 /**
 * Manage entities's life.
 * @extends {ES.System}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.LifeSystem = function()
 {

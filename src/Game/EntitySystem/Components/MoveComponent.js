@@ -1,10 +1,12 @@
 goog.provide('Kafkaf.MoveComponent');
+goog.require('ES.Utils');
 
 /**
 * Allow an entity to move.
-* @param {=number} speed Movements speed.
+* @param {number=} speed Movements speed.
 * @extends {ES.Component}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.MoveComponent = function( speed )
 {

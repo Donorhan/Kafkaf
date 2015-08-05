@@ -1,11 +1,13 @@
 goog.provide('Kafkaf.AISystem');
 goog.require('Kafkaf.AIComponent');
 goog.require('Kafkaf.PhysicBodyComponent');
+goog.require('ES.Utils');
 
 /**
 * Game system: Manage game's logic.
 * @extends {ES.System}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.AISystem = function()
 {

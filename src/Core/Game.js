@@ -4,7 +4,7 @@ goog.require('Core.SceneManager');
 /**
 * Entry point of a game.
 * @constructor
-* @interface
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Core.Game = function() 
 {	

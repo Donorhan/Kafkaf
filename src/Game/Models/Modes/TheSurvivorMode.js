@@ -4,8 +4,10 @@ goog.require('Kafkaf.Modes.GameMode');
 /**
 * The Survivor.
 * Rule: The last player alive win the game.
-* @param {ES.World} world World instance to work with.
 * @constructor
+* @extends {Kafkaf.Modes.GameMode}
+* @param {ES.World} world World instance to work with.
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.Modes.TheSurvivorMode = function( world )
 {
@@ -24,7 +26,7 @@ Kafkaf.Modes.TheSurvivorMode.prototype.update = function( deltaTime )
 
 /**
 * Call when an event pop.
-* @param {Core.Event} event An Event instance. 
+* @param {ES.Event} event An Event instance.
 */
 Kafkaf.Modes.TheSurvivorMode.prototype.onEvent = function( event )
 {

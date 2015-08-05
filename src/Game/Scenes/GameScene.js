@@ -1,5 +1,7 @@
 goog.provide('Kafkaf.GameScene');
+goog.require('ES.World');
 goog.require('Kafkaf.AISystem');
+goog.require('Kafkaf.Helpers.CollisionSolvers');
 goog.require('Kafkaf.GameSystem');
 goog.require('Kafkaf.PlayerSystem');
 goog.require('Kafkaf.PhysicSystem');
@@ -16,8 +18,9 @@ goog.require('Core.Scene');
 
 /**
 * The game scene: The most interesting scene, trust me.
-* @extends {Core.Scene}
 * @constructor
+* @implements {Core.Scene}
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.GameScene = function()
 {
@@ -38,10 +41,9 @@ Kafkaf.GameScene = function()
     */
     this.rendererSystem = null;
 }
-goog.inherits(Kafkaf.GameScene, Core.Scene);
 
 /**
-* Call when scene goes to foreground.
+* Call when scene goes to the foreground.
 */
 Kafkaf.GameScene.prototype.onActivation = function() 
 {
@@ -49,6 +51,11 @@ Kafkaf.GameScene.prototype.onActivation = function()
     if( gameSystem )
         gameSystem.startNewGame("level_test.json", Kafkaf.Modes.GameMode.Mode.TheOne, 2);
 };
+
+/**
+* Call when scene goes to the background.
+*/
+Kafkaf.GameScene.prototype.onInactivation = function() { };
 
 /**
 * Call when scene must be loaded.
@@ -68,13 +75,13 @@ Kafkaf.GameScene.prototype.onLoad = function()
     this.world.addSystem( new Kafkaf.PlayerSystem() );
 
     // Links.
-    this.rendererSystem             = this.world.getSystem(Kafkaf.RendererSystem);
-    var physicSystem                = this.world.getSystem(Kafkaf.PhysicSystem);
-    var collisionListenerSystem     = this.world.getSystem(Kafkaf.CollisionListenerSystem);
+    this.rendererSystem             = /** @type {Kafkaf.RendererSystem} */ (this.world.getSystem(Kafkaf.RendererSystem));
+    var physicSystem                = /** @type {Kafkaf.PhysicSystem} */ (this.world.getSystem(Kafkaf.PhysicSystem));
+    var collisionListenerSystem     = /** @type {Kafkaf.CollisionListenerSystem} */ (this.world.getSystem(Kafkaf.CollisionListenerSystem));
     physicSystem.physicWorld.SetContactListener(collisionListenerSystem.getContactListener());
 
     // Link collision solvers to the right system.
-    addCollisionSolvers(collisionListenerSystem);
+    Kafkaf.Helpers.CollisionSolvers.add(collisionListenerSystem);
 
     // Debug physic.
     {

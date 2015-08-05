@@ -4,13 +4,14 @@ goog.require('Kafkaf.CollisionListenerComponent');
 /**
 * Convert CollisionListenerComponent JSON to a CollisionListenerComponent.
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
-Kafkaf.Loaders.CollisionListenerLoader = function() { }
+Kafkaf.Loaders.CollisionListenerLoader = function() { };
 
 /**
 * Create a CollisionListenerComponent from JSON data.
 * @param {ES.Entity} entity An Entity instance to fill with data.
-* @param {string} data A String using JSON format.
+* @param {Object} data A String using JSON format.
 * @return {boolean} True if everything is ok.
 */
 Kafkaf.Loaders.CollisionListenerLoader.prototype.loadFromData = function( entity, data )

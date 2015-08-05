@@ -1,3 +1,4 @@
+goog.provide('Kafkaf.Helpers.CollisionSolvers');
 goog.require('Kafkaf.PhysicBodyComponent');
 goog.require('Kafkaf.Event.DamageEvent');
 goog.require('Kafkaf.Event.JumpEvent');
@@ -7,7 +8,7 @@ goog.require('Core.Application');
 * Add/Create callbacks for collisions.
 * @param {Kafkaf.CollisionListenerSystem} system A CollisionListenerSystem instance.
 */
-function addCollisionSolvers( system )
+Kafkaf.Helpers.CollisionSolvers.add = function( system )
 {
     function getWorld()
     {
@@ -45,4 +46,4 @@ function addCollisionSolvers( system )
     {
 
     });
-}
+};

@@ -1,10 +1,12 @@
 goog.provide('Kafkaf.CollisionListenerSystem');
 goog.require('Kafkaf.CollisionListenerComponent');
+goog.require('ES.Utils');
 
 /**
 * Listen physic world's collisions.
 * @extends {ES.System}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.CollisionListenerSystem = function()
 {
@@ -13,7 +15,7 @@ Kafkaf.CollisionListenerSystem = function()
 
     /**
     * Box2D's contacts listener.
-    * @type {JSContactListener}
+    * @type {Box2D.JSContactListener}
     * @private
     */
     this.contactListener = new Box2D.JSContactListener();
@@ -29,14 +31,14 @@ ES.Utils.extend(ES.System, Kafkaf.CollisionListenerSystem);
 
 /**
 * Callbacks: Link between callback name and methods.
-* @type {Array.<name, function>}
+* @type {Array.<function(Kafkaf.CollisionData)>}
 */
 Kafkaf.CollisionListenerSystem.callbacks = [];
 
 /**
 * Call by Box2D when a contact start.
 * @param {string} name Solver's name.
-* @param {function} callback Solver's function.
+* @param {function(Kafkaf.CollisionData)} callback Solver's function.
 */
 Kafkaf.CollisionListenerSystem.prototype.registerCollisionSolver = function( name, callback )
 {
@@ -139,7 +141,7 @@ Kafkaf.CollisionListenerSystem.notifyEntities = function( contact, type )
 * Useful to link it to the physic world.
 *
 * @see https://github.com/kripken/box2d.js/ for more informations.
-* @return {JSContactListener} A JSContactListener instance.
+* @return {Box2D.JSContactListener} A JSContactListener instance.
 */
 Kafkaf.CollisionListenerSystem.prototype.getContactListener = function()
 {

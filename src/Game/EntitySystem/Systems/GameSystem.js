@@ -8,6 +8,7 @@ goog.require('Kafkaf.Modes.RaceMode');
 goog.require('Kafkaf.Event.GameEvent');
 goog.require('Kafkaf.Models.Level');
 goog.require('Kafkaf.PlayerSystem');
+goog.require('ES.Utils');
 
 /**
 * Game system: Manage game's logic.
@@ -68,7 +69,7 @@ Kafkaf.GameSystem.prototype.startNewGame = function( levelName, mode, playerCoun
 /**
 * Load a level from his name.
 * @param {string} levelName Name of the level to load.
-* @param {function} callback Function to execute when the level is ready.
+* @param {function(boolean)} callback Function to execute when the level is ready.
 */
 Kafkaf.GameSystem.prototype.loadLevel = function( levelName, callback ) 
 {

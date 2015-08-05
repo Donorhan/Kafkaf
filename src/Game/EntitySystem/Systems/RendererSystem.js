@@ -1,11 +1,13 @@
 goog.provide('Kafkaf.RendererSystem');
 goog.require('Kafkaf.SpriteComponent');
+goog.require('ES.Utils');
 
 /**
 * Render the game.
 * @param {string} parentView A string representing the DOM element's name to use. 
 * @extends {ES.System}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.RendererSystem = function( parentView )
 {

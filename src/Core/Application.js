@@ -3,15 +3,16 @@ goog.provide('Core.Application');
 /**
 * Application's entry point.
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Core.Application = function()
 {
     /**
-    * Loop instance: Must be stocked in Javascript.
-    * @type {function}
+    * Loop instance: Must be stock in Javascript.
+    * @type {function(number)}
     * @private
     */
-    this.loop = null;
+    this.loop = function( currentTime ) {};
 
     /**
     * The game instance to run.
@@ -43,7 +44,7 @@ Core.Application.prototype.start = function()
 
     this.loop = function( currentTime )
     {
-        requestAnimFrame(_this.loop);
+        window.requestAnimFrame(_this.loop);
 
         // Compute delta time.
         var deltaTime   = currentTime - previousTime;

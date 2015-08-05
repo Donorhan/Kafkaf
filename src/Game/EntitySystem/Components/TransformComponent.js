@@ -1,9 +1,11 @@
 goog.provide('Kafkaf.TransformComponent');
+goog.require('ES.Utils');
 
 /**
 * Add basic mathematical attributs.
 * @extends {ES.Component}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.TransformComponent = function()
 {

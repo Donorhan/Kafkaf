@@ -6,8 +6,10 @@ goog.require('Kafkaf.Event.GameEvent');
 /**
 * The Survivor.
 * Rule: Kill the others players to win the game.
-* @param {ES.World} world World instance to work with.
 * @constructor
+* @extends {Kafkaf.Modes.GameMode}
+* @param {ES.World} world World instance to work with.
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.Modes.TheOneMode = function( world )
 {
@@ -22,7 +24,7 @@ Kafkaf.Modes.TheOneMode = function( world )
 
     /**
     * Array with the score (kill counter) for each player.
-    * @type {Array.<number, number>}
+    * @type {Array.<number>}
     * @private
     */
     this.scores = [];
@@ -54,7 +56,7 @@ Kafkaf.Modes.TheOneMode.prototype.update = function( deltaTime )
 
 /**
 * Call when an event pop.
-* @param {Core.Event} event An Event instance. 
+* @param {ES.Event} event An Event instance. 
 */
 Kafkaf.Modes.TheOneMode.prototype.onEvent = function( event )
 {

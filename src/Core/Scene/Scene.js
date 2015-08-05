@@ -2,18 +2,18 @@ goog.provide('Core.Scene');
 
 /**
 * A Scene.
-* @constructor
 * @interface
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Core.Scene = function() { };
 
 /**
-* Call when scene goes to foreground.
+* Call when scene goes to the foreground.
 */
 Core.Scene.prototype.onActivation = function() { };
 
 /**
-* Call when scene goes to background.
+* Call when scene goes to the background.
 */
 Core.Scene.prototype.onInactivation = function() { };
 

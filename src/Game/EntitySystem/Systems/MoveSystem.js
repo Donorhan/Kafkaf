@@ -2,6 +2,7 @@ goog.provide('Kafkaf.MoveSystem');
 goog.require('Kafkaf.MoveComponent');
 goog.require('Kafkaf.PhysicBodyComponent');
 goog.require('Kafkaf.Event.MoveEvent');
+goog.require('ES.Utils');
 
 /**
 * Manage entities's movements.

@@ -1,10 +1,12 @@
 goog.provide('Kafkaf.PhysicBodyComponent');
+goog.require('ES.Utils');
 
 /**
 * Add a physic body to an entity.
 * @param {b2Body} instance A Box2D body instance.
 * @extends {ES.Component}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.PhysicBodyComponent = function( instance )
 {

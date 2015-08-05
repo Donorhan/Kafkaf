@@ -5,12 +5,13 @@ goog.require('Kafkaf.Loaders.CollisionListenerLoader');
 goog.require('Kafkaf.Loaders.PhysicBodyLoader');
 goog.require('Kafkaf.Loaders.SpriteLoader');
 goog.require('Kafkaf.TransformComponent');
+goog.require('Utils');
 
 /**
 * Load levels.
 * @param {ES.World} world The World instance to fill.
 * @constructor
-* @interface
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.Models.Level = function( world )
 {
@@ -49,10 +50,10 @@ Kafkaf.Models.Level = function( world )
 */
 Kafkaf.Models.Level.prototype.init = function()
 {
-    this.entityBuilder.registerLoader("AIComponent", new Kafkaf.Loaders.AILoader(this.world.getSystem(Kafkaf.AISystem)) );
-    this.entityBuilder.registerLoader("CollisionListenerComponent", new Kafkaf.Loaders.CollisionListenerLoader(this.world.getSystem(Kafkaf.PhysicSystem)) );
+    this.entityBuilder.registerLoader("AIComponent", new Kafkaf.Loaders.AILoader() );
+    this.entityBuilder.registerLoader("CollisionListenerComponent", new Kafkaf.Loaders.CollisionListenerLoader() );
     this.entityBuilder.registerLoader("PhysicBodyComponent", new Kafkaf.Loaders.PhysicBodyLoader(this.world.getSystem(Kafkaf.PhysicSystem)) );
-    this.entityBuilder.registerLoader("SpriteComponent", new Kafkaf.Loaders.SpriteLoader(this.world.getSystem(Kafkaf.RendererSystem)) );
+    this.entityBuilder.registerLoader("SpriteComponent", new Kafkaf.Loaders.SpriteLoader() );
 
     return true;
 };
@@ -68,8 +69,8 @@ Kafkaf.Models.Level.prototype.getEntityBuilder = function()
 
 /**
 * Load a level from a file.
-* @param filePath Path to the file with level's data.
-* @param callback Callback.
+* @param {string} filePath Path to the file with level's data.
+* @param {function(boolean)} callback Callback.
 * @return True if everything is ok.
 */
 Kafkaf.Models.Level.prototype.loadFromFile = function( filePath, callback )
@@ -79,7 +80,7 @@ Kafkaf.Models.Level.prototype.loadFromFile = function( filePath, callback )
 
     // Load file.
     var _this = this;
-    loadJSON( filePath, function( JSONData )
+    Utils.loadJSON( filePath, function( JSONData )
     {
         callback( _this.loadFromData( JSONData ) );
     })
@@ -89,19 +90,22 @@ Kafkaf.Models.Level.prototype.loadFromFile = function( filePath, callback )
 
 /**
 * Load a level from JSON data.
-* @param {string} data Level's data (JSON format).
+* @param {Object} data Level's data (JSON format).
 * @return {boolean} True if everything is ok.
 */
 Kafkaf.Models.Level.prototype.loadFromData = function( data )
 {
+    // Cast.
+    data = /** @type {{spawns, entities}} */(data);
+
     // Ensure world is empty.
     this.world.removeEntities();
-    this.spawnPoints    = [];
-    this.ready          = false;
+    this.spawnPoints.length = 0;
+    this.ready              = false;
 
     // Load spawn points.
     for( var i = 0; i < data.spawns.length; i++ )
-        this.spawnPoints[i] = [data.spawns[i].x, data.spawns[i].y];        
+        this.spawnPoints.push([data.spawns[i].x, data.spawns[i].y]);        
 
     // Load entities.
     for( var i = 0; i < data.entities.length; i++ )
@@ -152,7 +156,7 @@ Kafkaf.Models.Level.prototype.isLoaded = function()
 
 /**
 * Get spawn points.
-* @return {Array.<Array.<number, number>>} Array of spawn points.
+* @return {Array.<Array.<number>>} Array of spawn points.
 */
 Kafkaf.Models.Level.prototype.getSpawnPoints = function()
 {

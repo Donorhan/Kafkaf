@@ -1,9 +1,11 @@
 goog.provide('Kafkaf.ControllableComponent');
+goog.require('ES.Utils');
 
 /**
 * Add the possibility to the user to control an entity.
 * @extends {ES.Component}
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.ControllableComponent = function()
 {

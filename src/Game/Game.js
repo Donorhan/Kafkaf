@@ -6,6 +6,8 @@ goog.require('Core.Game');
 /**
 * Manage game's logic.
 * @constructor
+* @extends {Core.Game}
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.Game = function()
 {
@@ -25,7 +27,6 @@ Kafkaf.Game.prototype.init = function()
     var configuration = Kafkaf.Models.Configuration.getInstance();
     configuration.loadFromFile( "./assets/data/config.json", function(success )
     {
-    	// Push default scene.
    		_this.sceneManager.pushScene( new Kafkaf.GameScene() );    	
     });
 

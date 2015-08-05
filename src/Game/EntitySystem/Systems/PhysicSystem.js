@@ -1,11 +1,13 @@
 goog.provide('Kafkaf.PhysicSystem');
 goog.require('Kafkaf.PhysicBodyComponent');
 goog.require('Kafkaf.Debug');
+goog.require('ES.Utils');
 
 /**
 * Simulate physics.
-* @extends {ES.System}
 * @constructor
+* @extends {ES.System}
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.PhysicSystem = function()
 {
@@ -28,7 +30,7 @@ Kafkaf.PhysicSystem = function()
 
     /**
     * The graphic object where Box2D will draw in debug mode.
-    * @type {PIXI.Graphics|null}
+    * @type {PIXI.Graphics}
     */
     this.debugGraphicObject = null;
 }
@@ -67,8 +69,8 @@ Kafkaf.PhysicSystem.prototype.onClear = function()
     }
 
     // Clear other data.
-    this.bodiesToRemove = [];
-    this.entities       = [];
+    this.bodiesToRemove.length  = 0;
+    this.entities.length        = 0;
 };
 
 /**
@@ -78,12 +80,12 @@ Kafkaf.PhysicSystem.prototype.onClear = function()
 Kafkaf.PhysicSystem.prototype.update = function( deltaTime )
 {
     // Simulate physic.
-    this.physicWorld.Step( 1.0 / 60.0, 3.0, 2.0 );
+    this.physicWorld.Step(1.0 / 60.0, 3.0, 2.0);
 
     // Remove physic bodies.
     for( var i = 0; i < this.bodiesToRemove.length; i++ )
         this.physicWorld.DestroyBody(this.bodiesToRemove[i]);
-    this.bodiesToRemove = [];
+    this.bodiesToRemove.length = 0;
 
     // Synchronize physic bodies with entities.
     for( var i = 0; i < this.entities.length; i++ )
@@ -111,7 +113,7 @@ Kafkaf.PhysicSystem.prototype.update = function( deltaTime )
 Kafkaf.PhysicSystem.prototype.activateDebug = function( )
 {
     this.debugGraphicObject = new PIXI.Graphics();
-    this.physicWorld.SetDebugDraw( Kafkaf.Debug.getPIXIDebugDraw(this.debugGraphicObject) );
+    this.physicWorld.SetDebugDraw(Kafkaf.Debug.getPIXIDebugDraw(this.debugGraphicObject));
 
     return this.debugGraphicObject;
 };
@@ -124,5 +126,5 @@ Kafkaf.PhysicSystem.prototype.onEntityRemoved = function( entity )
 {
     var physicBodyComponent = entity.getComponent(Kafkaf.PhysicBodyComponent);
     if( physicBodyComponent )
-        this.bodiesToRemove[this.bodiesToRemove.length] = physicBodyComponent.instance;
+        this.bodiesToRemove.push(physicBodyComponent.instance);
 };

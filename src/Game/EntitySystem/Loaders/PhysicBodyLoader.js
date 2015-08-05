@@ -4,22 +4,23 @@ goog.require('Kafkaf.TransformComponent');
 
 /**
 * Convert PhysicBodyComponent data to a PhysicBodyComponent.
-* @param {b2World} instance A Box2D's world instance.
 * @constructor
+* @param {Kafkaf.PhysicSystem} physicSystem A Box2D's world instance.
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
-Kafkaf.Loaders.PhysicBodyLoader = function( instance ) 
+Kafkaf.Loaders.PhysicBodyLoader = function( physicSystem ) 
 {
     /**
     * The physic world.
     * @type {b2World}
     */
-    this.physicWorld = instance.physicWorld;
+    this.physicWorld = physicSystem.physicWorld;
 }
 
 /**
 * Compute physic instance (Box2D) from JSON data.
 * @param {ES.Entity} entity An Entity instance to fill with data.
-* @param {string} data A String using JSON format.
+* @param {{type, fixtures}} data A String using JSON format.
 * @return {boolean} True if everything is ok.
 */
 Kafkaf.Loaders.PhysicBodyLoader.prototype.loadFromData = function( entity, data )

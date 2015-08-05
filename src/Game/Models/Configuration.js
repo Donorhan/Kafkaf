@@ -1,8 +1,10 @@
 goog.provide('Kafkaf.Models.Configuration');
+goog.require('Utils');
 
 /**
 * Game's configuration.
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.Models.Configuration = function()
 {
@@ -52,59 +54,62 @@ Kafkaf.Models.Configuration.prototype.init = function()
 {
     // Player 1.
     {
-        var controller          = [];
-        controller["type"]      = "keyboard";
-        controller["jump"]      = 90;
-        controller["left"]      = 81;
-        controller["right"]     = 68;
-        controller["action"]    = 83;
-        this.controllers[0]     = controller;
+        var controllerA          = [];
+        controllerA["type"]      = "keyboard";
+        controllerA["jump"]      = 90;
+        controllerA["left"]      = 81;
+        controllerA["right"]     = 68;
+        controllerA["action"]    = 83;
+        this.controllers[0]      = controllerA;
     }
 
     // Player 2.
     {
-        var controller          = [];
-        controller["type"]      = "keyboard";
-        controller["jump"]      = 38;
-        controller["left"]      = 37;
-        controller["right"]     = 39;
-        controller["action"]    = 40;
-        this.controllers[1]     = controller;
+        var controllerB          = [];
+        controllerB["type"]      = "keyboard";
+        controllerB["jump"]      = 38;
+        controllerB["left"]      = 37;
+        controllerB["right"]     = 39;
+        controllerB["action"]    = 40;
+        this.controllers[1]      = controllerB;
     }
 
     // Player 3.
     {
-        var controller          = [];
-        controller["type"]      = "keyboard";
-        controller["jump"]      = 73;
-        controller["left"]      = 74;
-        controller["right"]     = 76;
-        controller["action"]    = 75;
-        this.controllers[2]     = controller;
+        var controllerC          = [];
+        controllerC["type"]      = "keyboard";
+        controllerC["jump"]      = 73;
+        controllerC["left"]      = 74;
+        controllerC["right"]     = 76;
+        controllerC["action"]    = 75;
+        this.controllers[2]      = controllerC;
     }
 
     // Player 4.
     {
-        var controller          = [];
-        controller["type"]      = "keyboard";
-        controller["jump"]      = 104;
-        controller["left"]      = 100;
-        controller["right"]     = 102;
-        controller["action"]    = 101;
-        this.controllers[3]     = controller;
+        var controllerD          = [];
+        controllerD["type"]      = "keyboard";
+        controllerD["jump"]      = 104;
+        controllerD["left"]      = 100;
+        controllerD["right"]     = 102;
+        controllerD["action"]    = 101;
+        this.controllers[3]      = controllerD;
     }
 };
 
 /**
 * Load the configuration from a file.
-* @param filePath Path to the file with level's data.
-* @param callback Callback.
+* @param {string} filePath Path to the file with level's data.
+* @param {function(boolean)} callback Callback.
 */
 Kafkaf.Models.Configuration.prototype.loadFromFile = function( filePath, callback )
 {
     var _this = this;
-    loadJSON( filePath, function( JSONData )
+    Utils.loadJSON( filePath, function( JSONData )
     {
+        // Cast
+        JSONData = /** @type {{game, graphics, controls}} */ (JSONData); 
+
         // Game.
         _this.showName = JSONData.game.showName || false;
 
@@ -119,7 +124,7 @@ Kafkaf.Models.Configuration.prototype.loadFromFile = function( filePath, callbac
             _this.quality = Kafkaf.Models.Configuration.Quality.Low;            
 
         // Controllers.
-        _this.controllers = [];
+        _this.controllers.length = 0;
         for( var i = 0; i < JSONData.controls.length; i++ )
         {
             var controllerData          = [];
@@ -128,7 +133,7 @@ Kafkaf.Models.Configuration.prototype.loadFromFile = function( filePath, callbac
             controllerData["left"]      = JSONData.controls[i].left;
             controllerData["right"]     = JSONData.controls[i].right;
             controllerData["action"]    = JSONData.controls[i].action;
-            _this.controllers[_this.controllers.length] = controllerData;
+            _this.controllers.push(controllerData);
         }
 
         callback(true);

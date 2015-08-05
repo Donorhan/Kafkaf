@@ -4,20 +4,21 @@ goog.provide('Kafkaf.Modes.GameMode');
 * Abstract game mode.
 * @param {ES.World} world World instance to work with.
 * @constructor
+* @author Donovan ORHAN <dono.orhan@gmail.com>
 */
 Kafkaf.Modes.GameMode = function( world )
 {
     /**
     * The world instance: entities/components and systems management.
     * @type {ES.World}
-    * @private
+    * @protected
     */
     this.world = world;
 
     /**
     * Indicate if game is over.
     * @type {boolean}
-    * @private
+    * @protected
     */
     this.over = false;
 }
@@ -36,7 +37,7 @@ Kafkaf.Modes.GameMode.prototype.update = function( deltaTime ) {};
 
 /**
 * Call when an event pop.
-* @param {Core.Event} event An Event instance. 
+* @param {ES.Event} event An Event instance. 
 */
 Kafkaf.Modes.GameMode.prototype.onEvent = function( event ) {};
 
